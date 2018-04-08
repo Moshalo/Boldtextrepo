@@ -22,8 +22,13 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="612">
               <caret line="1425" column="35" selection-start-line="1425" selection-start-column="35" selection-end-line="1425" selection-end-column="35" />
+=======
+            <state relative-caret-position="-37">
+              <caret line="1066" column="31" lean-forward="false" selection-start-line="1066" selection-start-column="31" selection-end-line="1066" selection-end-column="31" />
+>>>>>>> 885162175bd8a119c1cafba72ca0a9f4314f7a8b
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
                 <element signature="e#3505#3830#0" />
@@ -245,7 +250,25 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+<<<<<<< HEAD
       <pane id="ProjectPane" />
+=======
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Python Projects" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TIN" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+>>>>>>> 885162175bd8a119c1cafba72ca0a9f4314f7a8b
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -877,8 +900,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/quest.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state>
           <caret selection-end-column="32" />
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="32" />
+>>>>>>> 885162175bd8a119c1cafba72ca0a9f4314f7a8b
         </state>
       </provider>
     </entry>
@@ -930,8 +958,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="612">
           <caret line="1425" column="35" selection-start-line="1425" selection-start-column="35" selection-end-line="1425" selection-end-column="35" />
+=======
+        <state relative-caret-position="-37">
+          <caret line="1066" column="31" lean-forward="false" selection-start-line="1066" selection-start-column="31" selection-end-line="1066" selection-end-column="31" />
+>>>>>>> 885162175bd8a119c1cafba72ca0a9f4314f7a8b
           <folding>
             <element signature="e#0#37#0" expanded="true" />
             <element signature="e#3505#3830#0" />
