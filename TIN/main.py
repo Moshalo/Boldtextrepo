@@ -1423,7 +1423,7 @@ class Main():
         5. Set custom health
         6. Alchemy Menu
         7. Blacksmithing Menu
-        8. Smelting Menu helloooooo
+        8. Smelting Menu 
         --------------------------------------
         """)
         choice = input("Type the number: ")
