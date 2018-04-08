@@ -1,8 +1,8 @@
 All credit for the base code goes to Francesco
 Balducci. The base has been heavily modified
 and converted to work with Python 3, all
-other credit goes to Shane Fales
+other credit goes to Shane Fales 
 
 No commercial use
 
-Copyright Shane Fales
+Copyright Shane Fales 2015-2018
