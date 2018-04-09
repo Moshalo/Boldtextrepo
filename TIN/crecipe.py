@@ -23,13 +23,13 @@ class RecipeDB():
         IDB.wberries: 2,
         IDB.potatoweed: 1,
         IDB.salt: 2
-    }, 0, 5, True)
+    }, 5, 20, True)
     lhpr = Recipe("Large Health Potion", "potion", 0, IDB.largehp, {
         IDB.bottlewater: 1,
         IDB.potatoweed: 2,
         IDB.wberries: 4,
         IDB.salt: 6
-    }, 0, 5, True)
+    }, 15, 55, True)
     hhpr = Recipe("Huge Health Potion", "potion", 0, IDB.hugehp, {
         IDB.bottlewater: 1,
         IDB.aethdust: 2,

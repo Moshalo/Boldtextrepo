@@ -126,10 +126,10 @@ class Main():
             IDB.aethdust: 0,
             IDB.centhorn: 0,
             IDB.wolfpelt: 0,
-            IDB.bottlewater: 2,
-            IDB.salt: 2,
+            IDB.bottlewater: 3,
+            IDB.salt: 3,
             IDB.potatoweed: 0,
-            IDB.wberries: 4,
+            IDB.wberries: 6,
             IDB.coal: 3,
             IDB.ironore: 0,
             IDB.ironingot: 1,
@@ -215,14 +215,10 @@ class Main():
         system("cls")
         print("""
         -----------------------------------------
-                    Changelog v0.4A
-        - New Item system fully Integrated X
-        - New Enemy system fully Integrated X
-        - New quest system FULLY Integrated with
-        5 starter quests
-        - Lots, lots and lots of new Items
-        - Plenty of new enemies
-        - All UI simplified and colorized
+                    Changelog v0.5A
+        - Crafting system implemented
+        - Main worldspace implemented with towns
+        - FIRST BUILD RELEASED AS AN EARLY DEMO!!
         -----------------------------------------
         """)
     def cinventory(self):
@@ -925,7 +921,12 @@ class Main():
             whatpot = input("What potion would you like to craft?: ")
             for b in RDB.allrecipes:
                 if whatpot == b.name:
-                    made = True
+                    if self.skillalch >= b.lvl:
+                        made = True
+                    else:
+                        made = False
+                        print("You are not skilled enough in Alchemy to create that potion.")
+                        print(b.ic.name + " requires level %s in Alchemy." % str(b.lvl))
                     for i in b.ing:
                         if b.ing[i] > self.stackinv[i]:
                             made = False
@@ -943,7 +944,7 @@ class Main():
                                 self.xpalch = 0
                             self.skillalch += 1
                             self.xpalchnext *= 1.5
-                            print("You leveled up in Alchemy! You are now level " + self.skillalch + ".")
+                            print("You leveled up in Alchemy! You are now level " + str(self.skillalch) + ".")
         if choice == '2':
             self.clear()
             print("-------------------------------")
@@ -1041,8 +1042,23 @@ class Main():
         self.fighting = self.bban
         self.fightdisp()
         self.fightform()
+    def stats(self):
+        self.clear()
+        cprint("█████████████████████████████████████████", 'yellow')
+        print("                   Stats                 ")
+        print("Alchemy: " + str(self.skillalch) + " (EXP: " + str(self.xpalch) + "/" + str(self.xpalchnext) + ")")
+        print("Blacksmithing: " + str(self.skillblacksmith) + " (EXP: " + str(self.xpblacksmith) + "/" + str(self.xpblacksmithnext) + ")")
+        print("Building: " + str(self.skillbuilding) + " (EXP: " + str(self.xpbuilding) + "/" + str(self.xpbuildingnext) + ")")
+        print("Cooking: " + str(self.skillcooking) + " (EXP: " + str(self.xpcooking) + "/" + str(self.xpcookingnext) + ")")
+        print("Fishing: " + str(self.skillfishing) + " (EXP: " + str(self.xpfishing) + "/" + str(self.xpfishingnext) + ")")
+        print("Foraging: " + str(self.skillforaging) + " (EXP: " + str(self.xpforaging) + "/" + str(self.xpforagingnext) + ")")
+        print("Gunsmithing: " + str(self.skillgunsmith) + " (EXP: " + str(self.xpgunsmith) + "/" + str(self.xpgunsmithnext) + ")")
+        print("Hunting: " + str(self.skillhunting) + " (EXP: " + str(self.xphunting) + "/" + str(self.xphuntingnext) + ")")
+        print("Leatherworking: " + str(self.skillleatherwork) + " (EXP: " + str(self.xpleatherwork) + "/" + str(self.xpleatherworknext) + ")")
+        print("Mining: " + str(self.skillmining) + " (EXP: " + str(self.xpmining) + "/" + str(self.xpminingnext) + ")")
+        cprint("█████████████████████████████████████████", 'yellow')
     def status(self):
-        print("≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡")
+        cprint("█████████████████████████████████████████", 'yellow')
         print("               Character                 ")
         print("Health: %d" % self.health)
         print("Gold: %d" % self.gold)
@@ -1054,7 +1070,7 @@ class Main():
                 print("X Coordinate - %d" % self.xcoord)
                 print("Y Coordinate - %d" % self.ycoord)
                 break
-        print("≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡")
+        cprint("█████████████████████████████████████████", 'yellow')
         print("               Equipment                 ")
         if self.rs != None:
             cprint(self.rs.style + "Gun: %s" % self.rs.name, self.rs.color)
@@ -1080,7 +1096,7 @@ class Main():
             cprint(self.fs.style + "Feet: %s" % self.fs.name, self.fs.color)
         else:
             print("Feet: Empty Slot")
-        print("≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡")
+        cprint("█████████████████████████████████████████", 'yellow')
     def dev1(self):
         self.status = 'combat'
         fight = random.randint(999, 1002)
@@ -1255,7 +1271,7 @@ class Main():
                 self.fightform()
     def save(self):
         save = input("What would you like to name the save?(This will overwrite): ")
-        pickle.dump([self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
+        pickle.dump([self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
                      self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
     def devsave(self):
         pickle.dump([self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled], open("devsave.tin", "wb"))
@@ -1263,7 +1279,7 @@ class Main():
         self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled = pickle.load(open("devsave.tin", "rb"))
     def loadt(self):
         load = input("What file would you like to load(Doesn't exist = Crash): ")
-        self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
+        self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
     def dev4(self):
         self.fighting = self.wban
         self.status = 'combat'
@@ -1550,6 +1566,7 @@ Commands = {
   '20657': Main.enabledev,
   'ddev': Main.disabledev,
   'save': Main.save,
+  'stats': Main.stats,
   'loadt': Main.loadt,
   'testload': Main.loadt,
   'dev4': Main.dev4,
@@ -1586,8 +1603,9 @@ print ("""
 menuchoice = input("Type the number: ")
 if menuchoice == "1":
     p.name = input("What is your name? ")
+    p.clear()
     print("%s wakes up in the middle of a forest. Try to get to civilization" % p.name)
-    print("(type help to get a list of actions)")
+    cprint(Style.BRIGHT + "(type help to get a list of actions)", 'yellow')
     if p.name == "Developer":
         p.defence = 30
     else:
