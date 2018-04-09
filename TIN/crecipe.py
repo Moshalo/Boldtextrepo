@@ -51,6 +51,12 @@ class RecipeDB():
         IDB.ironingot: 1,
         IDB.woodrod: 1
     }, 1, 15, True)
+    ironlsword = Recipe("Iron Longsword", "weapon", 0, IDB.ironlsword, {
+        IDB.coal: 3,
+        IDB.ironingot: 2,
+        IDB.woodrod: 2
+    }, 3, 30, True)
+
     #GUNSMITHING
     #ARMORSMITHING
     #COOKING

@@ -64,12 +64,32 @@ class Main():
         self.skillfishing = 1
         self.skillleatherwork = 1
         self.skillbuilding = 1
-        self.skillcommanding = 1
         self.skillmining = 1
         self.skillforaging = 1
         self.skillhunting = 1
         self.skillcooking = 1
         self.skillalch = 1
+        #CharacterSkillsEXP
+        self.xpblacksmith = 0
+        self.xpblacksmithnext = 5
+        self.xpgunsmith = 0
+        self.xpgunsmithnext = 5
+        self.xpfishing = 0
+        self.xpfishingnext = 10
+        self.xpleatherwork = 0
+        self.xpleatherworknext = 5
+        self.xpbuilding = 0
+        self.xpbuildingnext = 50
+        self.xpmining = 0
+        self.xpminingnext = 10
+        self.xpforaging = 0
+        self.xpforagingnext = 10
+        self.xphunting = 0
+        self.xphuntingnext = 10
+        self.xpcooking = 0
+        self.xpcookingnext = 5
+        self.xpalch = 0
+        self.xpalchnext = 5
         #CharacterMaterials
         self.matiron = 9999
         self.matcopper = 9999
@@ -1227,14 +1247,15 @@ class Main():
                 self.fightform()
     def save(self):
         save = input("What would you like to name the save?(This will overwrite): ")
-        pickle.dump([self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
+        pickle.dump([self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
+                     self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
     def devsave(self):
         pickle.dump([self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled], open("devsave.tin", "wb"))
     def devload(self):
         self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled = pickle.load(open("devsave.tin", "rb"))
     def loadt(self):
         load = input("What file would you like to load(Doesn't exist = Crash): ")
-        self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
+        self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
     def dev4(self):
         self.fighting = self.wban
         self.status = 'combat'
