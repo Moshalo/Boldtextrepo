@@ -1037,6 +1037,9 @@ class Main():
                     self.maxhealth += x.health
                     cprint("Equipped the " + self.fs.style + self.fs.name, self.fs.color)
                     break
+    def read(self):
+        print("WIP")
+        return 0
     def dev2(self):
         self.status = 'combat'
         self.fighting = self.bban

@@ -62,3 +62,4 @@ class RecipeDB():
     #COOKING
     #CONSTRUCTION
     allrecipes = [smallhpr, nhpr, spoison, ironingot, ironsword]
+
