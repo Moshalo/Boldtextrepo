@@ -936,6 +936,14 @@ class Main():
                             self.stackinv[i] -= b.ing[i]
                         self.inventory.append(b.ic)
                         print("You created a %s" % b.ic.name)
+                        self.xpalch += b.exp
+                        if self.xpalch >= self.xpalchnext:
+                            self.xpalch -= self.xpalchnext
+                            if self.xpalch < 0:
+                                self.xpalch = 0
+                            self.skillalch += 1
+                            self.xpalchnext *= 1.5
+                            print("You leveled up in Alchemy! You are now level " + self.skillalch + ".")
         if choice == '2':
             self.clear()
             print("-------------------------------")

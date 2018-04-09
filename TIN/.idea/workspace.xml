@@ -22,8 +22,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1203">
-              <caret line="755" column="34" lean-forward="true" selection-start-line="755" selection-start-column="34" selection-end-line="755" selection-end-column="34" />
+            <state relative-caret-position="2302">
+              <caret line="940" column="17" selection-start-line="940" selection-start-column="17" selection-end-line="940" selection-end-column="17" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
                 <element signature="e#3505#3830#0" />
@@ -50,7 +50,6 @@
                 <element signature="e#31744#32438#0" />
                 <element signature="e#32470#34439#0" />
                 <element signature="e#34471#36440#0" />
-                <element signature="e#36474#38462#0" />
                 <element signature="e#38503#38561#0" />
                 <element signature="e#38591#42247#0" />
                 <element signature="e#42276#42382#0" />
@@ -146,7 +145,7 @@
       <file leaf-file-name="ItemDB.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ItemDB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="374">
               <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
@@ -204,10 +203,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-8" />
-    <option name="width" value="1933" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="1932" />
+    <option name="height" value="1037" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -445,8 +444,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="1546" height="830" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="0" width="1932" height="1037" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -526,7 +524,6 @@
             <element signature="e#31744#32438#0" />
             <element signature="e#32470#34439#0" />
             <element signature="e#34471#36440#0" />
-            <element signature="e#36474#38462#0" />
             <element signature="e#38503#38561#0" />
             <element signature="e#38591#42247#0" />
             <element signature="e#42276#42382#0" />
@@ -594,7 +591,6 @@
             <element signature="e#31744#32438#0" />
             <element signature="e#32470#34439#0" />
             <element signature="e#34471#36440#0" />
-            <element signature="e#36474#38462#0" />
             <element signature="e#38503#38561#0" />
             <element signature="e#38591#42247#0" />
             <element signature="e#42276#42382#0" />
@@ -661,7 +657,6 @@
             <element signature="e#31744#32438#0" />
             <element signature="e#32470#34439#0" />
             <element signature="e#34471#36440#0" />
-            <element signature="e#36474#38462#0" />
             <element signature="e#38503#38561#0" />
             <element signature="e#38591#42247#0" />
             <element signature="e#42276#42382#0" />
@@ -728,7 +723,6 @@
             <element signature="e#31744#32438#0" />
             <element signature="e#32470#34439#0" />
             <element signature="e#34471#36440#0" />
-            <element signature="e#36474#38462#0" />
             <element signature="e#38503#38561#0" />
             <element signature="e#38591#42247#0" />
             <element signature="e#42276#42382#0" />
@@ -837,13 +831,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../TINTilePROTO/main.py" />
-    <entry file="file://$PROJECT_DIR$/item.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/misc.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -855,16 +842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ItemDB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -885,6 +862,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/item.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/crecipe.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43">
@@ -892,10 +876,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ItemDB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1203">
-          <caret line="755" column="34" lean-forward="true" selection-start-line="755" selection-start-column="34" selection-end-line="755" selection-end-column="34" />
+        <state relative-caret-position="2302">
+          <caret line="940" column="17" selection-start-line="940" selection-start-column="17" selection-end-line="940" selection-end-column="17" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
             <element signature="e#3505#3830#0" />
@@ -922,7 +916,6 @@
             <element signature="e#31744#32438#0" />
             <element signature="e#32470#34439#0" />
             <element signature="e#34471#36440#0" />
-            <element signature="e#36474#38462#0" />
             <element signature="e#38503#38561#0" />
             <element signature="e#38591#42247#0" />
             <element signature="e#42276#42382#0" />
