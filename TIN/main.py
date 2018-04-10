@@ -1053,12 +1053,13 @@ class Main():
         for x in self.inventory:
             if x.type == 'scroll':
                 if read == x.name2:
-                    if x.rt in self.alchrec:
-                        print("You already know this recipe..")
-                    else:
-                        self.alchrec.append(x.rt)
-                        print("You learned how to make " + x.name2 + ".")
-                        self.inventory.remove(x)
+                    if x.skill == 'alch':
+                        if x.rt in self.alchrec:
+                            print("You already know this recipe..")
+                        else:
+                            self.alchrec.append(x.rt)
+                            print("You learned how to make " + x.name2 + ".")
+                            self.inventory.remove(x)
 
     def dev2(self):
         self.status = 'combat'

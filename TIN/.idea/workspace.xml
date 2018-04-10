@@ -22,8 +22,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="104" column="24" lean-forward="true" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
+            <state relative-caret-position="438">
+              <caret line="1060" column="60" selection-start-line="1060" selection-start-column="60" selection-end-line="1060" selection-end-column="60" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
                 <element signature="e#4097#4422#0" />
@@ -483,7 +483,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="width" value="1935" />
     <option name="height" value="1040" />
@@ -2252,8 +2252,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="104" column="24" lean-forward="true" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
+        <state relative-caret-position="438">
+          <caret line="1060" column="60" selection-start-line="1060" selection-start-column="60" selection-end-line="1060" selection-end-column="60" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
             <element signature="e#4097#4422#0" />
