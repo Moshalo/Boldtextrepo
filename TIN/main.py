@@ -20,6 +20,7 @@ from npcDB import npcDB as NDB
 from quest import questDB as QDB
 from randomencounter import *
 from weapon import weapon as w
+from scroll import ScrollDB as SDB
 from armor import armor as a
 from misc import misc as m
 import pickle
@@ -101,7 +102,7 @@ class Main():
         self.compquests = []
         self.test = []
         #Crafting Recipes known
-        self.alchrec = [RDB.smallhpr, RDB.nhpr, RDB.spoison]
+        self.alchrec = [RDB.nhpr, RDB.spoison]
         self.bsrec = [RDB.ironsword]
         self.gsrec = []
         self.consrec = []
@@ -121,7 +122,7 @@ class Main():
         self.shreeda = town("Shreeda", 11, 27, 1, 0, [], [], [self.aitem])
         self.towns = [self.devtown, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda]
         #Townstuffs/
-        self.inventory = [I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
+        self.inventory = [SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
         self.stackinv = {
             IDB.aethdust: 0,
             IDB.centhorn: 0,
@@ -226,7 +227,10 @@ class Main():
         cprint("█████████████████████████████████████████", 'green')
         cprint(Style.BRIGHT + "               Inventory                 ", 'green')
         for x in self.inventory:
-            cprint("- " + x.style + x.name, x.color)
+            if x.type != 'scroll':
+                cprint("- " + x.style + x.name, x.color)
+            else:
+                cprint("- " + x.name)
         if self.gold > 0:
             cprint(Style.BRIGHT + "Gold: %d" % self.gold, 'yellow')
         if self.ammo > 0:
@@ -1038,8 +1042,24 @@ class Main():
                     cprint("Equipped the " + self.fs.style + self.fs.name, self.fs.color)
                     break
     def read(self):
-        print("WIP")
-        return 0
+        system("cls")
+        cprint("█████████████████████████████████████████", 'green')
+        cprint(Style.BRIGHT + "              Recipe Scrolls                 ", 'green')
+        for x in self.inventory:
+            if x.type == 'scroll':
+                cprint("- " + x.name2)
+        cprint("█████████████████████████████████████████", 'green')
+        read = input("Which scroll do you want to read?(This will consume the item): ")
+        for x in self.inventory:
+            if x.type == 'scroll':
+                if read == x.name2:
+                    if x.rt in self.alchrec:
+                        print("You already know this recipe..")
+                    else:
+                        self.alchrec.append(x.rt)
+                        print("You learned how to make " + x.name2 + ".")
+                        self.inventory.remove(x)
+
     def dev2(self):
         self.status = 'combat'
         self.fighting = self.bban
@@ -1541,9 +1561,6 @@ class Main():
         self.defence = x
     def showc(self):
         print("X: %d, Y: %d" % (self.xcoord, self.ycoord))
-    def readtest(self):
-        file = open("config.txt", "r")
-        print (file.read(10))
     def devt(self):
         print("You magically teleported to developer town")
         system("pause")
@@ -1551,10 +1568,10 @@ class Main():
         self.location = self.devtown
         self.towndisp()
 Commands = {
-  'readtest': Main.readtest,
   'help': Main.help,
   'inventory': Main.cinventory,
   'north': Main.gonorth,
+  'read': Main.read,
   'east': Main.goeast,
   'south': Main.gosouth,
   'west': Main.gowest,
