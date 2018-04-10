@@ -1060,7 +1060,6 @@ class Main():
                             self.alchrec.append(x.rt)
                             print("You learned how to make " + x.name2 + ".")
                             self.inventory.remove(x)
-
     def dev2(self):
         self.status = 'combat'
         self.fighting = self.bban
@@ -1593,6 +1592,9 @@ Commands = {
   'dev4': Main.dev4,
   'speak': Main.talkto,
   'dev5': Main.drop,
+  '06': Main.alchcraft,
+  '07': Main.bscraft,
+  '08': Main.smeltcraft,
   'dev6': Main.dev6,
   'devsave': Main.devsave,
   'devload': Main.devload,
