@@ -34,8 +34,13 @@ class ItemDB:
     lowhp = p("Small Health Potion", "potion", 20, 0, 10, 5, 'white', Style.DIM, 86000)
     hp = p("Health Potion", "potion", 35, 0, 30, 15, 'white', Style.BRIGHT, 86001)
     medhp = p("Medium Health Potion", "potion", 60, 0, 90, 45, 'green', Style.DIM, 86002)
-    largehp = p("Large Health Potion", "potion", 120, 0, 270, 135, 'cyan', Style.DIM, 86003)
-    hugehp = p("Huge Health Potion", "potion", 200, 0, 400, 200, 'cyan', Style.BRIGHT, 86004)
+    largehp = p("Large Health Potion", "potion", 120, 0, 270, 135, 'green', Style.BRIGHT, 86003)
+    hugehp = p("Huge Health Potion", "potion", 200, 0, 400, 200, 'cyan', Style.DIM, 86004)
+    smaethhp = p("Small Aetherial Potion", "spotion", 80, 0, 450, 200, 'magenta', Style.DIM, 86100)
+    aethhp = p("Aetherial Potion", "spotion", 130, 0, 800, 400, 'magenta', Style.BRIGHT, 86101)
+    largeaethhp = p("Large Aetherial Potion", "spotion", 250, 0, 1700, 850, 'magenta', Style.BRIGHT, 86102)
+    pureaethhp = p("Pure Aetherial Potion", "spotion", 410, 0, 3000, 1500, 'yellow', Style.BRIGHT, 86103)
+
     #Poisons
     poison = p("Simple Poison", "potion", -20, 0, 30, 15, 'white', Style.BRIGHT, 87010)
     # ---WEAPONS---
@@ -86,5 +91,5 @@ class ItemDB:
 
     itemlist = [coal, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
                 flpistol, gppistol, guildpistol, clothcap, clothpants, clothshirt, leathertunic, leathcolbp, aetherialcp, aetherialhelm, aetheriallp, aetherialwraps, ruggedshoes,
-                lowhp, hp, medhp, largehp, bjarncp, goldkho, redsteelnightblade, carvedpistol, simplemap]
+                lowhp, hp, medhp, largehp, smaethhp, aethhp, largeaethhp, pureaethhp, bjarncp, goldkho, redsteelnightblade, carvedpistol, simplemap]
     stackablelist = [coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]

@@ -33,7 +33,6 @@ class Main():
         self.maxhealth = 100
         self.xcoord = 5
         self.ycoord = 4
-        self.biome = "Forest"
         self.rs = None
         self.ms= None
         self.hs = None
@@ -59,7 +58,6 @@ class Main():
         self.statswords = 1
         self.statblock = 1
         self.statdodge = 1
-        #CharacterSkills(WIP)
         self.skillblacksmith = 1
         self.skillgunsmith = 1
         self.skillfishing = 1
@@ -122,7 +120,7 @@ class Main():
         self.shreeda = town("Shreeda", 11, 27, 1, 0, [], [], [self.aitem])
         self.towns = [self.devtown, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda]
         #Townstuffs/
-        self.inventory = [SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
+        self.inventory = [I.smaethhp, I.smaethhp, SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
         self.stackinv = {
             IDB.aethdust: 0,
             IDB.centhorn: 0,
@@ -203,13 +201,14 @@ class Main():
                     break
     def consume(self):
         self.cinventory()
-        x = input("What would you like to consume?")
+        x = input("What would you like to consume?: ").upper()
         for z in self.inventory:
-            if x == z.name:
+            if x == z.name.upper():
                 self.inventory.remove(z)
                 self.health += z.hh
-                if self.health > self.maxhealth:
-                    self.health = self.maxhealth
+                if z.type != 'spotion':
+                    if self.health > self.maxhealth:
+                        self.health = self.maxhealth
                 print("You consumed the %s" % z.name)
                 break
     def changelog(self):
@@ -1084,7 +1083,10 @@ class Main():
         self.clear()
         cprint("█████████████████████████████████████████", 'yellow')
         print("               Character                 ")
-        print("Health: %d" % self.health)
+        if self.health > self.maxhealth:
+            print("Health: " + str(self.maxhealth) + Fore.GREEN + "(" + str(self.health - self.maxhealth) + ")" + Style.RESET_ALL + "/" + str(self.maxhealth))
+        else:
+            print("Health: " + str(self.health) + "/" + str(self.maxhealth))
         print("Gold: %d" % self.gold)
         print("Range Damage: %s" % self.gundamage)
         print("Damage: %d" % self.damage)
@@ -1557,7 +1559,7 @@ Commands = {
   'showc': Main.showc,
   'questlog': Main.questlog,
   'completed quests': Main.compquests,
-  '0': Main.devmenu,
+  '00': Main.devmenu,
   'map': Main.map,
   }
 p = Main()
