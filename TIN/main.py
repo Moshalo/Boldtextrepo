@@ -27,7 +27,7 @@ import pickle
 class Main():
     def __init__(self):
         #Character
-        system("title Time is now v0.4")
+        system("title Time is now v0.5")
         self.name = ""
         self.health = 100
         self.maxhealth = 100
@@ -970,9 +970,9 @@ class Main():
         x = item("","", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', None, 0)
     def equip(self):
         self.cinventory()
-        equip = input("What would you like to equip?: ")
+        equip = input("What would you like to equip?: ").upper()
         for x in self.inventory:
-            if equip == x.name:
+            if equip == x.name.upper():
                 if x.type == "mwep":
                     if self.ms != None:
                         self.inventory.append(self.ms)
@@ -1049,10 +1049,10 @@ class Main():
             if x.type == 'scroll':
                 cprint("- " + x.name2)
         cprint("█████████████████████████████████████████", 'green')
-        read = input("Which scroll do you want to read?(This will consume the item): ")
+        read = input("Which scroll do you want to read?(This will consume the item): ").upper()
         for x in self.inventory:
             if x.type == 'scroll':
-                if read == x.name2:
+                if read == x.name2.upper():
                     if x.skill == 'alch':
                         if x.rt in self.alchrec:
                             print("You already know this recipe..")
@@ -1081,6 +1081,7 @@ class Main():
         print("Mining: " + str(self.skillmining) + " (EXP: " + str(self.xpmining) + "/" + str(self.xpminingnext) + ")")
         cprint("█████████████████████████████████████████", 'yellow')
     def status(self):
+        self.clear()
         cprint("█████████████████████████████████████████", 'yellow')
         print("               Character                 ")
         print("Health: %d" % self.health)
@@ -1131,60 +1132,6 @@ class Main():
         self.devenabled = 1
     def disabledev(self):
         self.devenabled = 0
-    def battleplayerturn(self):
-        system("cls")
-        self.battledisp()
-        pbchoice = input("> ")
-        if pbchoice == 2:
-            if self.yardsaway == 10:
-                cc = input("You are only 10 yards away from the enemy company. Would you like to melee charge instead?(Y/N): ")
-                if cc == "Y":
-                    print("NRY")
-                else:
-                    print("Choose a different action.")
-                    system("pause")
-                    system("cls")
-                    self.battleplayerturn()
-            else:
-                self.yardsaway -= 10
-                print("Your company advances 10 yards.")
-                system("pause")
-                self.battlenemyturn()
-        elif pbchoice == 1:
-            if self.yardsaway > self.cr:
-                print("Your company fires, but is out of range to hit any enemies.")
-            else:
-                return 0
-    def battleenemyturn(self):
-        print("NRY")
-        system("pause")
-        self.battleplayerturn()
-    def battledisp(self):
-        if self.aa == 0:
-            self.aas = "They have the accuracy advantage"
-        else:
-            self.aas = "You have the accuracy advantage"
-        if self.battling != None:
-            print("""
-            =======
-            Battle
-            =======
-            Your company is %d yards away
-            from the enemy.
-            -------------------------------
-            %s
-            -------------------------------
-            What would you like to do? (Choose a number)
-            1. Fire
-            2. Advance ten yards
-            3. Fall back ten yards
-            4. Retreat
-            5. Battle Info
-            -------------------------------
-
-            """ % (self.yardsaway, self.aas))
-    def battleform(self):
-        return 0
     def combatplayerturn(self):
         if self.damage < self.fighting.defence:
             fhit = randint(1, (self.health + 5))
@@ -1613,16 +1560,14 @@ Commands = {
   '0': Main.devmenu,
   'map': Main.map,
   }
-
 p = Main()
-print ("""
-----------------------------------------
-          The Time is Now v0.4
-1. New game
-2. Load game
-3. About
-----------------------------------------
-""")
+p.clear()
+cprint(Style.DIM + "█████████████████████████████████████████", 'blue')
+cprint(Style.BRIGHT + "         The Time is Now v0.5", 'blue')
+cprint(Style.BRIGHT + "1. New Game", 'blue')
+cprint(Style.BRIGHT + "2. Load game", 'blue')
+cprint(Style.BRIGHT + "3. About", 'blue')
+cprint(Style.DIM + "█████████████████████████████████████████", 'blue')
 menuchoice = input("Type the number: ")
 if menuchoice == "1":
     p.name = input("What is your name? ")
@@ -1653,7 +1598,8 @@ elif menuchoice == "6":
 else:
     print("Wrong command typed")
 while(p.health > 0):
-  line = input("> ")
+  line = input(Fore.GREEN + Style.BRIGHT + "> ")
+  print(Style.RESET_ALL)
   args = line.split()
   if len(args) > 0:
     commandFound = False
