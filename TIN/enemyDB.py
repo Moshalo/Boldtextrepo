@@ -32,8 +32,12 @@ class enemyDB:
     I.disasterblade, I.aetherialcp, I.aetheriallp, I.bladeofeternity, I.disasterblade,
     I.disasterblade, I.largehp, I.largehp, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust,
     I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.largehp, I.medhp, I.medhp], 1110)
+    corruptroyalsquire = e("Corrupted Royal Squire", 200, randint(200, 400), 400, 115, 30, 0, [I.bread, I.royalhp, I.royalhp, I.largehp, I.largehp,
+    I.disasterblade, I.bread], 1119)
+    corruptroyalknight = e("Corrupted Royal Knight", 400, randint(400, 500), 500, 180, 80, 0, [I.bread, I.royalhp,
+    I.royalhp, I.royalhp, I.largehp, I.largebottle, I.gsofkings, I.gsofkings], 1120)
 
-    enemylist = [mugger, siban, armcent, enraeth]
+    enemylist = [mugger, siban, armcent, enraeth, corruptroyalknight, corruptroyalsquire]
 
 
     #QUEST ENEMIES

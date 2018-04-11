@@ -36,6 +36,7 @@ class ItemDB:
     medhp = p("Medium Health Potion", "potion", 60, 0, 90, 45, 'green', Style.DIM, 86002)
     largehp = p("Large Health Potion", "potion", 120, 0, 270, 135, 'green', Style.BRIGHT, 86003)
     hugehp = p("Huge Health Potion", "potion", 200, 0, 400, 200, 'cyan', Style.DIM, 86004)
+    royalhp = p("Royal Health Potion", "potion", 350, 0, 650, 300, 'cyan', Style.BRIGHT, 86005)
     smaethhp = p("Small Aetherial Potion", "spotion", 80, 0, 450, 200, 'magenta', Style.DIM, 86100)
     aethhp = p("Aetherial Potion", "spotion", 130, 0, 800, 400, 'magenta', Style.BRIGHT, 86101)
     largeaethhp = p("Large Aetherial Potion", "spotion", 250, 0, 1700, 850, 'magenta', Style.BRIGHT, 86102)
@@ -75,21 +76,23 @@ class ItemDB:
     # ---HELMETS---
     armnemes = a("Armored Nemes", "helm", 35, 40, 39500, 34900, 'red', Style.BRIGHT, 50, 9010)
     clothcap = a("Cloth cap", "helm", 1, 0, 10, 5, 'white', Style.DIM, 1, 2000)
-    aetherialhelm = a("Aetherial Headwrap", "helm", 22, 25, 24000, 14000, 'magenta', Style.BRIGHT, 36, 600)
+    aetherialhelm = a("Aetherial Headwrap", "helm", 22, 40, 24000, 14000, 'magenta', Style.BRIGHT, 36, 600)
     # ---CHESTPLATES---
     clothshirt = a("Cloth shirt", 'chest', 2, 0, 5, 3, 'white', Style.DIM, 1, 1999)
     leathertunic = a("Leather tunic", "chest", 3, 0, 15, 7, 'white', Style.DIM, 1, 2001)
     leathcolbp = a("Colonial Breastplate", "chest", 10, 0, 100, 50, 'white', Style.BRIGHT, 10, 100)
-    aetherialcp = a("Aetherial Chestplate", "chest", 30, 40, 30000, 20000, 'magenta', Style.BRIGHT, 36, 601)
+    aetherialcp = a("Aetherial Chestplate", "chest", 30, 55, 30000, 20000, 'magenta', Style.BRIGHT, 36, 601)
+    guildedcp = a("Guilded Chestplate", "chest", 40, 60, 45000, 28000, 'yellow', Style.BRIGHT, 42, 721)
     bjarncp = a("Bjarn's Chestplate", "chest", 50, 100, 40000, 35000, 'red', Style.BRIGHT, 50, 9050)
     # ---LEGPLATES---
     clothpants = a("Cloth pants", "legs", 2, 0, 12, 6, 'white', Style.DIM, 1, 2002)
-    aetheriallp = a("Aetherial Legwraps", "legs", 27, 35, 28000, 18000, 'magenta', Style.BRIGHT, 36, 602)
+    guildedlp = a("Guilded Legplates", "legs", 37, 50, 32000, 17500, 'yellow', Style.BRIGHT, 42, 722)
+    aetheriallp = a("Aetherial Legwraps", "legs", 27, 45, 28000, 18000, 'magenta', Style.BRIGHT, 36, 602)
     # ---BOOTS---
     ruggedshoes = a("Rugged shoes", "foot", 1, 0, 10, 5, 'white', Style.DIM, 1, 2003)
-    aetherialwraps = a("Aetherial Footwraps", "foot", 22, 20, 24000, 14000, 'magenta', Style.BRIGHT, 36, 603)
+    aetherialwraps = a("Aetherial Footwraps", "foot", 22, 35, 24000, 14000, 'magenta', Style.BRIGHT, 36, 603)
 
-    itemlist = [coal, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
+    itemlist = [guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
                 flpistol, gppistol, guildpistol, clothcap, clothpants, clothshirt, leathertunic, leathcolbp, aetherialcp, aetherialhelm, aetheriallp, aetherialwraps, ruggedshoes,
                 lowhp, hp, medhp, largehp, smaethhp, aethhp, largeaethhp, pureaethhp, bjarncp, goldkho, redsteelnightblade, carvedpistol, simplemap]
     stackablelist = [coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]

@@ -58,6 +58,7 @@ class Main():
         self.statswords = 1
         self.statblock = 1
         self.statdodge = 1
+        #CharacterSkills(
         self.skillblacksmith = 1
         self.skillgunsmith = 1
         self.skillfishing = 1
