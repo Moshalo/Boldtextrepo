@@ -95,7 +95,7 @@ class Main():
         self.matcopper = 9999
         self.mattin = 9999
         self.matsteel = 9999
-        self.matwood = 9999
+        self.matwood = 999
         #QUESTS
         self.questlog = []
         self.compquests = []
