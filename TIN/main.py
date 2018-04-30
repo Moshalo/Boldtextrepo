@@ -875,9 +875,9 @@ class Main():
             for a in self.gsrec:
                 print("- " + a.name)
             print("-------------------------------")
-            whatpot = input("What would you like to smith?: ")
+            whatpot = input("What would you like to smith?: ").lower()
             for b in self.gsrec:
-                if whatpot == b.name:
+                if whatpot == b.name.lower():
                     made = True
                     for i in b.ing:
                         if b.ing[i] > self.stackinv[i]:
@@ -922,9 +922,9 @@ class Main():
             for a in self.alchrec:
                 print("- " + a.name)
             print("-------------------------------")
-            whatpot = input("What potion would you like to craft?: ")
+            whatpot = input("What potion would you like to craft?: ").lower()
             for b in RDB.allrecipes:
-                if whatpot == b.name:
+                if whatpot == b.name.lower():
                     if self.skillalch >= b.lvl:
                         made = True
                     else:
@@ -934,7 +934,8 @@ class Main():
                     for i in b.ing:
                         if b.ing[i] > self.stackinv[i]:
                             made = False
-                            print("You do not have the required ingredients...")
+                            if self.skillalch >= b.lvl:
+                                print("You do not have the required ingredients...")
                             break
                     if made == True:
                         for i in b.ing:
@@ -956,9 +957,9 @@ class Main():
             for a in self.alchrec:
                 print("- " + a.name)
             print("-------------------------------")
-            whatrec = input("What recipe do you want to check?: ")
+            whatrec = input("What recipe do you want to check?: ").lower()
             for b in self.alchrec:
-                if whatrec == b.name:
+                if whatrec == b.name.lower():
                     print("This recipe requires...")
                     for i in b.ing:
                         print(i.name + " x" + str(b.ing[i]))
@@ -1565,12 +1566,12 @@ Commands = {
   }
 p = Main()
 p.clear()
-cprint(Style.DIM + "█████████████████████████████████████████", 'blue')
-cprint(Style.BRIGHT + "         The Time is Now v0.5", 'blue')
-cprint(Style.BRIGHT + "1. New Game", 'blue')
-cprint(Style.BRIGHT + "2. Load game", 'blue')
-cprint(Style.BRIGHT + "3. About", 'blue')
-cprint(Style.DIM + "█████████████████████████████████████████", 'blue')
+cprint(Style.DIM + "█████████████████████████████████████████", 'green')
+cprint(Style.BRIGHT + "         The Time is Now v0.5", 'green')
+cprint(Style.BRIGHT + "1. New Game", 'green')
+cprint(Style.BRIGHT + "2. Load game", 'green')
+cprint(Style.BRIGHT + "3. About", 'green')
+cprint(Style.DIM + "█████████████████████████████████████████", 'green')
 menuchoice = input("Type the number: ")
 if menuchoice == "1":
     p.name = input("What is your name? ")
@@ -1601,7 +1602,7 @@ elif menuchoice == "6":
 else:
     print("Wrong command typed")
 while(p.health > 0):
-  line = input(Fore.GREEN + Style.BRIGHT + "> ")
+  line = input(Fore.GREEN + Style.BRIGHT + "> ").lower()
   print(Style.RESET_ALL)
   args = line.split()
   if len(args) > 0:
