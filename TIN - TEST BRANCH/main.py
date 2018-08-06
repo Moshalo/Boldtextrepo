@@ -6,7 +6,8 @@ from termcolor import colored, cprint
 import colorama
 from colorama import Fore, Back, Style
 from item import *
-from location import *
+from location import townDB as TDB
+from location import dynlDB as dynlDB
 from enemy import *
 from quest import *
 from unit import *
@@ -31,8 +32,8 @@ class Main():
         self.name = ""
         self.health = 100
         self.maxhealth = 100
-        self.xcoord = 5
-        self.ycoord = 4
+        self.xpos = 16
+        self.ypos = 8
         self.rs = None
         self.ms= None
         self.hs = None
@@ -111,15 +112,6 @@ class Main():
         self.aitem = item("34y6y734577562735723", "admin", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'white', Style.DIM, 666)
         #Inventory
         self.gold = 0
-        #Towns
-        self.devtown = town("DEV", 9999, 9999, 1, 10000,  [I.bread], [I.bread], [I.bread])
-        self.norag = town("Norag", 16, -11, 1, 0, [self.aitem], [], [self.aitem])
-        self.gabesh = town("Gabesh", 6, 12, 0, 0, [], [], [])
-        self.yoeran = town("Yoeran", 4, 16, 1, 0, [self.aitem], [self.aitem], [self.aitem])
-        self.litau = town("Litau", 30, -55, 1, 0, [self.aitem], [], [])
-        self.uash = town(colored(Style.BRIGHT + "Uash", 'white'), 33, -4, 0, 0, [self.aitem], [self.aitem], [self.aitem])
-        self.shreeda = town("Shreeda", 11, 27, 1, 0, [], [], [self.aitem])
-        self.towns = [self.devtown, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda]
         #Townstuffs/
         self.inventory = [I.smaethhp, I.smaethhp, SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
         self.stackinv = {
@@ -352,9 +344,8 @@ class Main():
             self.clear()
             self.blacksmithdisp()
         elif goto == "Leave":
-            self.ycoord -= 1
             system("cls")
-            print("You have left %s." % self.location.name)
+            print("You have left %s. Type 'town' to reenter." % self.location.name)
             self.location = None
         else:
             print("Unknown option")
@@ -783,82 +774,53 @@ class Main():
             print(y.name)
         print("-----------------------------------------")
     def gonorth(self):
-        self.ycoord += 1
-        print("You travel north a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
-        for y in NDB.allnpcs:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    self.npc = y
-                    print("You come across a person named %s" % y.name)
-                    input("Press a key to continue.")
-                    system('cls')
-                    self.npcmenu()
+        if self.worldspace[(self.ypos - 1)][self.xpos] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.ypos -= 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
     def goeast(self):
-        self.xcoord += 1
-        print("You travel east a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
-        for y in NDB.allnpcs:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    self.npc = y
-                    print("You come across a person named %s" % y.name)
-                    input("Press a key to continue.")
-                    system('cls')
-                    self.npcmenu()
-
-        for y in E.qenemylist:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    if y.quest in self.questlog:
-                        self.status = 'questcombat'
-                        self.fighting = y
-                        self.fightdisp()
-                        self.fightform()
+        if self.worldspace[self.ypos][(self.xpos + 1)] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.xpos += 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
     def gosouth(self):
-        self.ycoord -= 1
-        print("You travel south a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
+        if self.worldspace[self.ypos + 1][self.xpos] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.ypos += 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
     def gowest(self):
-        self.xcoord -= 1
-        print("You travel west a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
-        for y in NDB.allnpcs:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    self.npc = y
-                    print("You come across a person named %s" % y.name)
-                    input("Press a key to continue.")
-                    system('cls')
-                    self.npcmenu()
+        if self.worldspace[self.ypos][(self.xpos - 1)] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.xpos -= 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+    def town(self):
+        for x in dynlDB.pointsofinterest:
+            if x.pos == self.worldspace[self.ypos][self.xpos]:
+                input("You enter " + x.town.name + " and are welcomed through the gates...")
+                self.clear()
+                self.location = x.town
+                self.towndisp()
+
     def bscraft(self):
         self.clear()
         print("-------------------------------")
@@ -1570,6 +1532,7 @@ Commands = {
   'inventory': Main.cinventory,
   'north': Main.gonorth,
   'read': Main.read,
+  'town': Main.town,
   'east': Main.goeast,
   'south': Main.gosouth,
   'west': Main.gowest,
