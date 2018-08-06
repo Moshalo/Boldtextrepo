@@ -754,6 +754,15 @@ class Main():
                     input("Press a key to continue.")
                     system('cls')
                     self.npcmenu()
+        for y in E.qenemylist:
+            if self.xcoord == y.xc:
+                if self.ycoord == y.yc:
+                    if y.quest in self.questlog:
+                        if y.health > 0:
+                            self.status = 'questcombat'
+                            self.fighting = y
+                            self.fightdisp()
+                            self.fightform()
     def goeast(self):
         self.xcoord += 1
         print("You travel east a bit.")
@@ -778,10 +787,11 @@ class Main():
             if self.xcoord == y.xc:
                 if self.ycoord == y.yc:
                     if y.quest in self.questlog:
-                        self.status = 'questcombat'
-                        self.fighting = y
-                        self.fightdisp()
-                        self.fightform()
+                        if y.health > 0:
+                            self.status = 'questcombat'
+                            self.fighting = y
+                            self.fightdisp()
+                            self.fightform()
     def gosouth(self):
         self.ycoord -= 1
         print("You travel south a bit.")
@@ -793,6 +803,23 @@ class Main():
                     system("pause")
                     self.clear()
                     self.towndisp()
+        for y in NDB.allnpcs:
+            if self.xcoord == y.xc:
+                if self.ycoord == y.yc:
+                    self.npc = y
+                    print("You come across a person named %s" % y.name)
+                    input("Press a key to continue.")
+                    system('cls')
+                    self.npcmenu()
+        for y in E.qenemylist:
+            if self.xcoord == y.xc:
+                if self.ycoord == y.yc:
+                    if y.quest in self.questlog:
+                        if y.health > 0:
+                            self.status = 'questcombat'
+                            self.fighting = y
+                            self.fightdisp()
+                            self.fightform()
     def gowest(self):
         self.xcoord -= 1
         print("You travel west a bit.")
@@ -812,6 +839,15 @@ class Main():
                     input("Press a key to continue.")
                     system('cls')
                     self.npcmenu()
+        for y in E.qenemylist:
+            if self.xcoord == y.xc:
+                if self.ycoord == y.yc:
+                    if y.quest in self.questlog:
+                        if y.health > 0:
+                            self.status = 'questcombat'
+                            self.fighting = y
+                            self.fightdisp()
+                            self.fightform()
     def bscraft(self):
         self.clear()
         print("-------------------------------")
