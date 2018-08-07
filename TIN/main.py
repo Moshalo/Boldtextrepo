@@ -6,7 +6,8 @@ from termcolor import colored, cprint
 import colorama
 from colorama import Fore, Back, Style
 from item import *
-from location import *
+from location import townDB as TDB
+from location import dynlDB as dynlDB
 from enemy import *
 from quest import *
 from unit import *
@@ -31,8 +32,8 @@ class Main():
         self.name = ""
         self.health = 100
         self.maxhealth = 100
-        self.xcoord = 5
-        self.ycoord = 4
+        self.xpos = 16
+        self.ypos = 8
         self.rs = None
         self.ms= None
         self.hs = None
@@ -111,15 +112,6 @@ class Main():
         self.aitem = item("34y6y734577562735723", "admin", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'white', Style.DIM, 666)
         #Inventory
         self.gold = 0
-        #Towns
-        self.devtown = town("DEV", 9999, 9999, 1, 10000,  [I.bread], [I.bread], [I.bread])
-        self.norag = town("Norag", 16, -11, 1, 0, [self.aitem], [], [self.aitem])
-        self.gabesh = town("Gabesh", 6, 12, 0, 0, [], [], [])
-        self.yoeran = town("Yoeran", 4, 16, 1, 0, [self.aitem], [self.aitem], [self.aitem])
-        self.litau = town("Litau", 30, -55, 1, 0, [self.aitem], [], [])
-        self.uash = town(colored(Style.BRIGHT + "Uash", 'white'), 33, -4, 0, 0, [self.aitem], [self.aitem], [self.aitem])
-        self.shreeda = town("Shreeda", 11, 27, 1, 0, [], [], [self.aitem])
-        self.towns = [self.devtown, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda]
         #Townstuffs/
         self.inventory = [I.smaethhp, I.smaethhp, SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
         self.stackinv = {
@@ -142,6 +134,53 @@ class Main():
         self.dkit2 = [I.bread, I.ironsword, I.ironlsword, I.leathertunic, I.steelsword, I.steellsword, I.leathcolbp, I.bsteelsword, I.bsteellsword, I.disasterblade, I.sfsword,
                          I.bladeofeternity, I.aetherialhelm, I.aetherialcp, I.aetheriallp, I.aetherialwraps, I.gsofkings, I.mkwarhammer]
         self.dkit3 = [I.largehp, I.largehp, I.largehp, I.largehp, I.largehp, I.largehp, I.largehp, I.largehp, I.largehp, I.largehp, I.largehp, I.largehp]
+        #WORLDSPACE(TESTING)
+        # GRID X             0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43
+        self.worldspace = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 0
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 1
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 2
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 3
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 4
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 5DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 7, 0, 8, 9, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 6DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 13, 14, 15, 16, 17, 18, 19, 0, 20, 21, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 7DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 24, 0, 25, 26, 27, 28, 29, 30, 31, 32, 0, 33, 34, 0, 0, 35, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 8DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 0, 600, 0, 48, 49, 50, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 9DONE1MISTAKE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 0, 0, 63, 64, 65, 66, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 10DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 11DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 12DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 130, 131, 132, 133, 134, 135, 136, 137, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 13DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 14DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 162, 0, 0, 0, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 15DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 186, 187, 188, 0, 189, 0, 0, 0, 0, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 0, 208, 0, 0, 0, 0, 0, 0, 0],  # 16DONE
+            [0, 0, 0, 0, 0, 0, 0, 209, 210, 211, 212, 0, 0, 0, 213, 214, 215, 0, 0, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 0, 232, 233, 0, 0, 0, 0, 0],  # 17DONE
+            [0, 0, 0, 0, 0, 0, 0, 234, 235, 236, 0, 0, 0, 237, 238, 239, 240, 241, 0, 0, 0, 0, 0, 0, 0, 242, 243, 244, 245, 246, 247, 248, 249, 250, 0, 251, 252, 253, 0, 0, 0, 0, 0, 0],  # 18
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 19
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 20
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 0, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 21
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 0, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 22
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 23
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 0, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 24
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 25
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 0, 0, 30, 31, 32, 33, 34, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 26
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 0, 0, 31, 32, 33, 34, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 27
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 11, 0, 0, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 0, 0, 31, 32, 33, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 28
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 0, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 0, 0, 31, 32, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 29
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 0, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 30
+            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 0, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 31
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 11, 12, 0, 14, 15, 16, 17, 18, 19, 20, 21, 0, 0, 24, 25, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 32
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 12, 0, 14, 15, 16, 17, 18, 19, 20, 21, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 33
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 16, 17, 18, 19, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 34
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 16, 0, 18, 0, 0, 21, 22, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 35
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 21, 22, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 36
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 21, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 37
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 38
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 39
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 40
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 41
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 42
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ]  # 43
     def help(self):
         system("cls")
         print("""
@@ -305,9 +344,8 @@ class Main():
             self.clear()
             self.blacksmithdisp()
         elif goto == "Leave":
-            self.ycoord -= 1
             system("cls")
-            print("You have left %s." % self.location.name)
+            print("You have left %s. Type 'town' to reenter." % self.location.name)
             self.location = None
         else:
             print("Unknown option")
@@ -736,118 +774,52 @@ class Main():
             print(y.name)
         print("-----------------------------------------")
     def gonorth(self):
-        self.ycoord += 1
-        print("You travel north a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
-        for y in NDB.allnpcs:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    self.npc = y
-                    print("You come across a person named %s" % y.name)
-                    input("Press a key to continue.")
-                    system('cls')
-                    self.npcmenu()
-        for y in E.qenemylist:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    if y.quest in self.questlog:
-                        if y.health > 0:
-                            self.status = 'questcombat'
-                            self.fighting = y
-                            self.fightdisp()
-                            self.fightform()
+        if self.worldspace[(self.ypos - 1)][self.xpos] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.ypos -= 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
     def goeast(self):
-        self.xcoord += 1
-        print("You travel east a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
-        for y in NDB.allnpcs:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    self.npc = y
-                    print("You come across a person named %s" % y.name)
-                    input("Press a key to continue.")
-                    system('cls')
-                    self.npcmenu()
-
-        for y in E.qenemylist:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    if y.quest in self.questlog:
-                        if y.health > 0:
-                            self.status = 'questcombat'
-                            self.fighting = y
-                            self.fightdisp()
-                            self.fightform()
+        if self.worldspace[self.ypos][(self.xpos + 1)] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.xpos += 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
     def gosouth(self):
-        self.ycoord -= 1
-        print("You travel south a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
-        for y in NDB.allnpcs:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    self.npc = y
-                    print("You come across a person named %s" % y.name)
-                    input("Press a key to continue.")
-                    system('cls')
-                    self.npcmenu()
-        for y in E.qenemylist:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    if y.quest in self.questlog:
-                        if y.health > 0:
-                            self.status = 'questcombat'
-                            self.fighting = y
-                            self.fightdisp()
-                            self.fightform()
+        if self.worldspace[self.ypos + 1][self.xpos] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.ypos += 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
     def gowest(self):
-        self.xcoord -= 1
-        print("You travel west a bit.")
-        for x in self.towns:
-            if self.xcoord == x.x:
-                if self.ycoord == x.y:
-                    print("You have reached %s" % x.name)
-                    self.location = x
-                    system("pause")
-                    self.clear()
-                    self.towndisp()
-        for y in NDB.allnpcs:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    self.npc = y
-                    print("You come across a person named %s" % y.name)
-                    input("Press a key to continue.")
-                    system('cls')
-                    self.npcmenu()
-        for y in E.qenemylist:
-            if self.xcoord == y.xc:
-                if self.ycoord == y.yc:
-                    if y.quest in self.questlog:
-                        if y.health > 0:
-                            self.status = 'questcombat'
-                            self.fighting = y
-                            self.fightdisp()
-                            self.fightform()
+        if self.worldspace[self.ypos][(self.xpos - 1)] == 0:
+            print("You cannot go through this water without a boat!")
+        else:
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+            self.xpos -= 1
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            #print(str(self.worldspace[self.ypos][self.xpos]))
+    def town(self):
+        for x in dynlDB.pointsofinterest:
+            if x.pos == self.worldspace[self.ypos][self.xpos]:
+                input("You enter " + x.town.name + " and are welcomed through the gates...")
+                self.clear()
+                self.location = x.town
+                self.towndisp()
     def bscraft(self):
         self.clear()
         print("-------------------------------")
@@ -1282,14 +1254,14 @@ class Main():
     def save(self):
         save = input("What would you like to name the save?(This will overwrite): ")
         pickle.dump([self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
-                     self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
+                     self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled, TDB.ttown.bankamount], open("{0}.tin".format(save), "wb"))
     def devsave(self):
         pickle.dump([self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled], open("devsave.tin", "wb"))
     def devload(self):
-        self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled = pickle.load(open("devsave.tin", "rb"))
+        self.eitemslist, self.inventory, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled, TDB.ttown = pickle.load(open("devsave.tin", "rb"))
     def loadt(self):
         load = input("What file would you like to load(Doesn't exist = Crash): ")
-        self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
+        self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled, TDB.ttown.bankamount = pickle.load(open("{0}.tin".format(load), "rb"))
     def dev4(self):
         self.fighting = self.wban
         self.status = 'combat'
@@ -1559,6 +1531,7 @@ Commands = {
   'inventory': Main.cinventory,
   'north': Main.gonorth,
   'read': Main.read,
+  'town': Main.town,
   'east': Main.goeast,
   'south': Main.gosouth,
   'west': Main.gowest,
