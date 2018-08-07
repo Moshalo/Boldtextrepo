@@ -8,6 +8,7 @@ from colorama import Fore, Back, Style
 from item import *
 from location import townDB as TDB
 from location import dynlDB as dynlDB
+from location import biomeDB as bDB
 from enemy import *
 from quest import *
 from unit import *
@@ -773,15 +774,23 @@ class Main():
         for y in self.questlog:
             print(y.name)
         print("-----------------------------------------")
+    def area(self):
+        for x in dynlDB.northbeachesl:
+            if x == self.worldspace[self.ypos][self.xpos]:
+                print(bDB.northbeaches.description)
+        print("Biome type: ")
     def gonorth(self):
         if self.worldspace[(self.ypos - 1)][self.xpos] == 0:
             print("You cannot go through this water without a boat!")
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
             self.ypos -= 1
-            for x in dynlDB.pointsofinterest:
+            for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(x.description, 'red')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def goeast(self):
         if self.worldspace[self.ypos][(self.xpos + 1)] == 0:
@@ -789,9 +798,12 @@ class Main():
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
             self.xpos += 1
-            for x in dynlDB.pointsofinterest:
+            for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(x.description, 'red')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gosouth(self):
         if self.worldspace[self.ypos + 1][self.xpos] == 0:
@@ -799,9 +811,12 @@ class Main():
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
             self.ypos += 1
-            for x in dynlDB.pointsofinterest:
+            for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(x.description, 'red')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gowest(self):
         if self.worldspace[self.ypos][(self.xpos - 1)] == 0:
@@ -809,9 +824,12 @@ class Main():
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
             self.xpos -= 1
-            for x in dynlDB.pointsofinterest:
+            for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+            for x in dynlDB.pointsofinterest:
+                if x.pos == self.worldspace[self.ypos][self.xpos]:
+                    cprint(x.description, 'red')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def town(self):
         for x in dynlDB.pointsofinterest:
@@ -1070,10 +1088,9 @@ class Main():
                             print("You learned how to make " + x.name2 + ".")
                             self.inventory.remove(x)
     def dev2(self):
-        self.status = 'combat'
-        self.fighting = self.bban
-        self.fightdisp()
-        self.fightform()
+        print(dynlDB.p12.description)
+        x = str(input("What would you like this description to be?: "))
+        dynlDB.p12.description = ("'" + x + "'")
     def stats(self):
         self.clear()
         cprint("█████████████████████████████████████████", 'yellow')
@@ -1254,14 +1271,23 @@ class Main():
     def save(self):
         save = input("What would you like to name the save?(This will overwrite): ")
         pickle.dump([self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
-                     self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled, TDB.ttown.bankamount], open("{0}.tin".format(save), "wb"))
+                     self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
+        #City and town data
+        pickle.dump([TDB.ttown.bankamount, TDB.ttown.generalstore, TDB.ttown.blacksmith, TDB.ttown.gunsmith], open("{0}.tin".format(save + "cd"), "wb"))
+        #POIData
+        pickle.dump([dynlDB.p12.description], open("{0}.tin".format(save + "poi"), "wb"))
+
     def devsave(self):
         pickle.dump([self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled], open("devsave.tin", "wb"))
     def devload(self):
         self.eitemslist, self.inventory, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled, TDB.ttown = pickle.load(open("devsave.tin", "rb"))
     def loadt(self):
         load = input("What file would you like to load(Doesn't exist = Crash): ")
-        self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled, TDB.ttown.bankamount = pickle.load(open("{0}.tin".format(load), "rb"))
+        self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
+        #City and town data
+        TDB.ttown.bankamount, TDB.ttown.generalstore, TDB.ttown.blacksmith, TDB.ttown.gunsmith = pickle.load(open("{0}.tin".format(load + "cd"), "rb"))
+        #POIData
+        dynlDB.p12.description = pickle.load(open("{0}.tin".format(load + "poi"), "rb"))
     def dev4(self):
         self.fighting = self.wban
         self.status = 'combat'
@@ -1528,6 +1554,7 @@ class Main():
         self.towndisp()
 Commands = {
   'help': Main.help,
+  'area': Main.area,
   'inventory': Main.cinventory,
   'north': Main.gonorth,
   'read': Main.read,
