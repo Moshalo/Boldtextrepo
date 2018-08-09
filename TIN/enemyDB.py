@@ -15,12 +15,12 @@ class enemyDB:
 
 
     #Low Tier Enemies
-    mugger = e("Mugger", 40, randint(40, 60), 60, 10, 1, 0, [I.irondagger, I.irondagger, I.bread, I.bread, I.clothcap, I.clothpants], 1)
-    fban = e("Woodland Bandit", 20, randint(20, 40), 40, 3, 1, 1, [I.wberries, I.wberries, I.irondagger, I.irondagger], 2)
-    wolf = e("Wolf", 10, randint(10, 30), 30, 6, 1, 1, [I.wolfpelt], 3)
+    mugger = e("Mugger", 40, randint(40, 60), 60, 3, 1, 0, [I.irondagger, I.irondagger, I.bread, I.bread, I.clothcap, I.clothpants], 1)
+    fban = e("Woodland Bandit", 20, randint(20, 40), 40, 3, 1, 1, [I.wberries, I.wberries, I.irondagger, I.irondagger, I.irondagger, I.irondagger, I.ironlsword, I.ironlsword, I.ironlsword, I.steelsword, I.steelsword, I.steellsword], 2)
+    wolf = e("Wolf", 10, randint(10, 30), 30, 2, 1, 1, [I.wolfpelt], 3)
 
     #Low-Mid Tier Enemies
-    siban = e("Snake Bandit", 160, randint(160, 200), 200, 35, 8, 1, [I.gppistol, I.ironlsword, I.ironlsword], 100)
+    siban = e("Snake Bandit", 160, randint(160, 200), 200, 10, 8, 1, [I.gppistol, I.ironlsword, I.ironlsword], 100)
 
     #Mid Tier Enemies
     armcent = e("Armored Centaur", 260, randint(260, 350), 350, 60, 20, 0, [I.bsteellsword, I.bsteellsword, I.bsteellsword, I.bsteellsword, I.disasterblade,
@@ -37,7 +37,7 @@ class enemyDB:
     corruptroyalknight = e("Corrupted Royal Knight", 400, randint(400, 500), 500, 180, 80, 0, [I.guildedhelm, I.guildedlp, I.guildedcp, I.guildedboots, I.royalhp,
     I.royalhp, I.royalhp, I.largehp, I.gsofkings], 1120)
 
-    enemylist = [mugger, siban, armcent, enraeth, corruptroyalknight, corruptroyalsquire]
+    enemylist = [fban, wolf, mugger, siban, armcent, enraeth, corruptroyalknight, corruptroyalsquire]
 
 
     #QUEST ENEMIES

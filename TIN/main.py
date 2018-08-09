@@ -56,6 +56,7 @@ class Main():
         self.cdid = 99
         self.devenabled = 1
         self.ammo = 0
+        self.devdropvar = 0
         #CharacterStats(WIP)
         self.statswords = 1
         self.statblock = 1
@@ -225,6 +226,7 @@ class Main():
                         self.stackinv[x] += 1
                     else:
                         self.inventory.append(x)
+
     def renc(self):
         x = random.randint(1, 5)
         for y in self.reclist:
@@ -1276,7 +1278,6 @@ class Main():
         pickle.dump([TDB.ttown.bankamount, TDB.ttown.generalstore, TDB.ttown.blacksmith, TDB.ttown.gunsmith], open("{0}.tin".format(save + "cd"), "wb"))
         #POIData
         pickle.dump([dynlDB.p12.description], open("{0}.tin".format(save + "poi"), "wb"))
-
     def devsave(self):
         pickle.dump([self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled], open("devsave.tin", "wb"))
     def devload(self):
