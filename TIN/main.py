@@ -183,6 +183,12 @@ class Main():
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 41
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 42
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ]  # 43
+        self.wolfdt = [
+            {'item': I.wolfpelt, 'minqty': 1, 'maxqty': 2, 'dc': 100},
+            {'item': I.sharpcanine, 'minqty': 1, 'maxqty': 5, 'dc': 85},
+            {'item': I.broketooth, 'minqty': 1, 'maxqty': 10, 'dc': 90},
+            {'item': I.disasterblade, 'minqty': 1, 'maxqty': 1, 'dc': 25}
+        ]
     def help(self):
         system("cls")
         print("""
@@ -226,7 +232,22 @@ class Main():
                         self.stackinv[x] += 1
                     else:
                         self.inventory.append(x)
+    def dropt(self):
+        y = randint(0, 100)
+        print(y)
+        if self.status == 'questcombat':
+            if self.fighting.qi is not None:
+                self.inventory.append(self.fighting.qi)
+                print("%s added to inventory" % self.fighting.qi.name)
+                self.status = 'normal'
 
+        for d in self.wolfdt:
+            for key in d:
+                if key == 'dc':
+                    y = random.randint(0, 100)
+                    if y <= d['dc']:
+                        x = random.randint(d['minqty'], d['maxqty'])
+                        print("Dropped " + str(x) + d['item'].name + "(s)")
     def renc(self):
         x = random.randint(1, 5)
         for y in self.reclist:
@@ -1578,6 +1599,7 @@ Commands = {
   'loadt': Main.loadt,
   'testload': Main.loadt,
   'dev4': Main.dev4,
+  'dropt': Main.dropt,
   'speak': Main.talkto,
   'dev5': Main.drop,
   '06': Main.alchcraft,

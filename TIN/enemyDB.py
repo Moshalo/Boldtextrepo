@@ -15,27 +15,20 @@ class enemyDB:
 
 
     #Low Tier Enemies
-    mugger = e("Mugger", 40, randint(40, 60), 60, 3, 1, 0, [I.irondagger, I.irondagger, I.bread, I.bread, I.clothcap, I.clothpants], 1)
-    fban = e("Woodland Bandit", 20, randint(20, 40), 40, 3, 1, 1, [I.wberries, I.wberries, I.irondagger, I.irondagger, I.irondagger, I.irondagger, I.ironlsword, I.ironlsword, I.ironlsword, I.steelsword, I.steelsword, I.steellsword], 2)
-    wolf = e("Wolf", 10, randint(10, 30), 30, 2, 1, 1, [I.wolfpelt], 3)
+    mugger = e("Mugger", 40, randint(40, 60), 60, 3, 1, 0, [], 1)
+    fban = e("Woodland Bandit", 20, randint(20, 40), 40, 3, 1, 1, [], 2)
+    wolf = e("Wolf", 10, randint(10, 30), 30, 2, 1, 1, [], 3)
 
     #Low-Mid Tier Enemies
-    siban = e("Snake Bandit", 160, randint(160, 200), 200, 10, 8, 1, [I.gppistol, I.ironlsword, I.ironlsword], 100)
+    siban = e("Snake Bandit", 160, randint(160, 200), 200, 10, 8, 1, [], 100)
 
     #Mid Tier Enemies
-    armcent = e("Armored Centaur", 260, randint(260, 350), 350, 60, 20, 0, [I.bsteellsword, I.bsteellsword, I.bsteellsword, I.bsteellsword, I.disasterblade,
-    I.disasterblade], 1010)
+    armcent = e("Armored Centaur", 260, randint(260, 350), 350, 60, 20, 0, [], 1010)
 
     #High Tier Enemies
-    enraeth = e("Enraged Aetherial", 250, randint(250, 350), 350, 120, 45, 0, [I.disasterblade, I.disasterblade, I.disasterblade, I.disasterblade, I.aetherialhelm,
-    I.aetheriallp, I.aetherialwraps, I.disasterblade,
-    I.disasterblade, I.aetherialcp, I.aetheriallp, I.bladeofeternity, I.disasterblade,
-    I.disasterblade, I.largehp, I.largehp, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust,
-    I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.aethdust, I.largehp, I.medhp, I.medhp], 1110)
-    corruptroyalsquire = e("Corrupted Royal Squire", 200, randint(200, 400), 400, 115, 30, 0, [I.guildedboots, I.guildedcc, I.guildedccp, I.guildedcpants, I.bread, I.royalhp, I.royalhp, I.largehp, I.largehp,
-    I.corruptedroyalsw, I.bread], 1119)
-    corruptroyalknight = e("Corrupted Royal Knight", 400, randint(400, 500), 500, 180, 80, 0, [I.guildedhelm, I.guildedlp, I.guildedcp, I.guildedboots, I.royalhp,
-    I.royalhp, I.royalhp, I.largehp, I.gsofkings], 1120)
+    enraeth = e("Enraged Aetherial", 250, randint(250, 350), 350, 120, 45, 0, [], 1110)
+    corruptroyalsquire = e("Corrupted Royal Squire", 200, randint(200, 400), 400, 115, 30, 0, [], 1119)
+    corruptroyalknight = e("Corrupted Royal Knight", 400, randint(400, 500), 500, 180, 80, 0, [], 1120)
 
     enemylist = [fban, wolf, mugger, siban, armcent, enraeth, corruptroyalknight, corruptroyalsquire]
 
@@ -47,3 +40,21 @@ class enemyDB:
 
     #BOSSES (EXPECT CHANGES)
     morkool = boss("Morkool the Unchained", 'red', Style.BRIGHT, 6000, 6000, 350, 110, [], [spec.mkhambash, spec.mkhambash, spec.mkkick, spec.mkhambash], [], 20, [], 1)
+
+
+    #DROP TABLES(WIP)
+    wofldt = [
+        {'item': I.wolfpelt, 'minqty': 1, 'maxqty': 2, 'dc': 100},
+        {'item': I.sharpcanine, 'minqty': 1, 'maxqty': 5, 'dc': 75},
+        {'item': I.broketooth, 'minqty': 1, 'maxqty': 10, 'dc': 80}
+    ]
+    muggerdt = [
+        {'item': I.irondagger, 'minqty': 1, 'maxqty': 2, 'dc': 40},
+        {'item': I.clothshirt, 'minqty': 1, 'maxqty': 1, 'dc': 30},
+        {'item': I.leathertunic, 'minqty': 1, 'maxqty': 1, 'dc': 20},
+        {'item': I.clothpants, 'minqty': 1, 'maxqty': 1, 'dc': 25},
+        {'item': I.leatherboots, 'minqty': 1, 'maxqty': 1, 'dc': 25},
+        {'item': I.muggercap, 'minqty': 1, 'maxqty': 1, 'dc': 25}
+    ]
+    fbandt = []
+    #Low-Mid Tier Drop tables

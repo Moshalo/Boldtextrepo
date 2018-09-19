@@ -25,6 +25,8 @@ class ItemDB:
     aethdust = m("Aetherial Dust", "craft", 0, 0, 400, 200, 'cyan', Style.BRIGHT, 90000)
     centhorn = m("Centaur Horn", "craft", 0, 0, 0, 0, 'green', Style.BRIGHT, 90001)
     wolfpelt = m("Wolf Pelt", "craft", 0, 0, 30, 15, 'white', Style.DIM, 90002)
+    sharpcanine = m("Sharp Canine", "craft", 0, 0, 10, 5, 'white', Style.DIM, 90003)
+    broketooth = m("Broken Tooth", "craft", 0, 0, 5, 2, 'white', Style.DIM, 90004)
     bottlewater = m("Bottle of Water", "craft", 0, 0, 20, 10, 'white', Style.DIM, 91000)
     salt = m("Salt", "craft", 0, 0, 5, 2, 'white', Style.DIM, 91001)
     potatoweed = m("Potato Weed", "craft", 0, 0, 15, 7, 'white', Style.DIM, 91002)
@@ -48,7 +50,7 @@ class ItemDB:
     #Common
     ironsword = w("Iron Shortsword", "mwep", 6, 0, 10, 5, 'white', Style.DIM, 1, 100)
     ironlsword = w("Iron Longsword", "mwep", 9, 0, 15, 7, 'white', Style.DIM, 1, 101)
-    irondagger = w("Iron Longsword", "mwep", 5, 0, 6, 3, 'white', Style.DIM, 1, 102)
+    irondagger = w("Iron Dagger", "mwep", 5, 0, 6, 3, 'white', Style.DIM, 1, 102)
     #Common+
     steelsword = w("Steel Shortsword", "mwep", 12, 0, 100, 50, 'white', Style.BRIGHT, 5, 200)
     steellsword = w("Steel Longsword", "mwep", 15, 0, 120, 60, 'white', Style.BRIGHT, 5, 201)
@@ -71,12 +73,14 @@ class ItemDB:
     #Uniques
     mkwarhammer = w("Morkool's Warhammer", "mwep", 225, 0, 30000, 20000, 'red', Style.BRIGHT, 50, 9000)
     # ---GUNS---
+    shodpistol = w("Shoddy Pistol", 'rwep', 20, 15, 55, 20, 'white', Style.DIM, 1, 1003)
     flpistol = w("Flintlock Pistol", "rwep", 30, 25, 100, 50, 'white', Style.DIM, 1, 1000)
     gppistol = w("Gold Pistol", "rwep", 90, 38, 400, 200, 'white', Style.BRIGHT, 5, 1001)
     guildpistol = w("Guilded Pistol", "rwep", 120, 55, 6000, 3000, 'green', Style.DIM, 25, 1002)
     # ---HELMETS---
     armnemes = a("Armored Nemes", "helm", 35, 40, 39500, 34900, 'red', Style.BRIGHT, 50, 9010)
     clothcap = a("Cloth cap", "helm", 1, 0, 10, 5, 'white', Style.DIM, 1, 2000)
+    muggercap = a("Mugger's cap", "helm", 2, 0, 10, 5, 'white', Style.DIM, 1, 2101)
     aetherialhelm = a("Aetherial Headwrap", "helm", 22, 40, 24000, 14000, 'magenta', Style.BRIGHT, 36, 600)
     guildedcc = a("Guilded Chainmail Coif", "helm", 28, 30, 26000, 13000, 'magenta', Style.BRIGHT, 38, 715)
     guildedhelm = a("Guilded Helm", "helm", 32, 50, 29000, 14500, 'yellow', Style.BRIGHT, 42, 720)
@@ -95,10 +99,11 @@ class ItemDB:
     aetheriallp = a("Aetherial Legwraps", "legs", 27, 45, 28000, 18000, 'magenta', Style.BRIGHT, 36, 602)
     # ---BOOTS---
     ruggedshoes = a("Rugged shoes", "foot", 1, 0, 10, 5, 'white', Style.DIM, 1, 2003)
+    leatherboots = a("Leather boots", 'food', 2, 0, 20, 10, 'white', Style.DIM, 1, 2004)
     aetherialwraps = a("Aetherial Footwraps", "foot", 22, 5, 24000, 14000, 'magenta', Style.BRIGHT, 36, 603)
     guildedboots = a("Guilded Boots", "foot", 30, 10, 28000, 14000, 'yellow', Style.BRIGHT, 38, 718)
 
-    itemlist = [corruptedroyalsw, guildedcpants, guildedcc, guildedccp, guildedboots, guildedhelm, guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
+    itemlist = [leatherboots, shodpistol, corruptedroyalsw, guildedcpants, guildedcc, guildedccp, guildedboots, guildedhelm, guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
                 flpistol, gppistol, guildpistol, clothcap, clothpants, clothshirt, leathertunic, leathcolbp, aetherialcp, aetherialhelm, aetheriallp, aetherialwraps, ruggedshoes,
                 lowhp, hp, medhp, largehp, smaethhp, aethhp, largeaethhp, pureaethhp, bjarncp, goldkho, redsteelnightblade, carvedpistol, simplemap]
     stackablelist = [coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]
