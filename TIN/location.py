@@ -1,5 +1,5 @@
 from enemyDB import enemyDB as EDB
-
+from ItemDB import ItemDB as I
 
 class biome():
     def __init__(self, type, mra, wl, temp, description):
@@ -39,7 +39,7 @@ class campDB():
     bcamp1 = camp("Bandit Camp", 42, [], [], "A small campsite with bandits around the campfire..")
 
 class townDB():
-    ttown = town("Test Town", 12, True, 60000, [], [], [])
+    ttown = town("Test Town", 12, True, 60000, [], [], [I.wolfpelt])
 
 class dynl():
     def __init__(self, pos, town, locations, npcs, enemies, description):
@@ -56,6 +56,8 @@ class dynlDB:
     p42 = dynl(42, None, [], [], [EDB.fban, EDB.fban, EDB.fban], "A bandit camp lies ahead... type 'attack camp' if you want to fight")
     pointsofinterest = [p42]
     townsl = [p12]
+    #BORDERS
+    southcompwall = [320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330]
     #NORTH
     northbeachesl = [5, 6, 7, 12, 13, 14, 15, 16 ,17 ,19, 23, 24, 25, 32, 37, 38, 39, 47, 52, 62, 68, 78, 86, 104, 105, 106, 79, 63, 48, 35, 36, 51, 67, 85, 107, 137, 138]
     northwoodsl = [42, 43, 44, 45, 56, 57, 58, 59, 60, 71, 72, 73, 74, 75, 76, 98, 99, 119, 120]
@@ -66,3 +68,4 @@ class dynlDB:
     tempforestl = [111, 112, 113, 114, 115, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 152, 154, 155, 156, 157,
                    168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 192, 193, 194, 195, 196, 197,
                    198, 199, 200, 201, 202, 203, 222, 223, 224, 225, 226, 227]
+    jungle = [267, 278, 269, 270, 271, 272, 273, 295, 296, 297, 298, 299, 300, 301]

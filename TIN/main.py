@@ -117,17 +117,19 @@ class Main():
         #Townstuffs/
         self.inventory = [I.smaethhp, I.smaethhp, SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
         self.stackinv = {
-            IDB.aethdust: 0,
-            IDB.centhorn: 0,
-            IDB.wolfpelt: 0,
-            IDB.bottlewater: 3,
-            IDB.salt: 3,
-            IDB.potatoweed: 0,
-            IDB.wberries: 6,
-            IDB.coal: 3,
-            IDB.ironore: 0,
-            IDB.ironingot: 1,
-            IDB.woodrod: 1
+            I.aethdust: 0,
+            I.centhorn: 0,
+            I.wolfpelt: 0,
+            I.bottlewater: 3,
+            I.salt: 3,
+            I.potatoweed: 0,
+            I.wberries: 6,
+            I.coal: 3,
+            I.ironore: 0,
+            I.ironingot: 1,
+            I.woodrod: 1,
+            I.sharpcanine: 0,
+            I.broketooth: 0
         }
         #self.inventory = [I.bread, I.ironsword, I.ironlsword, I.leathertunic, I.steelsword, I.steellsword, I.leathcolbp, I.bsteelsword, I.bsteellsword, I.disasterblade, I.sfsword,
                          #I.bladeofeternity, I.aetherialhelm, I.aetherialcp, I.aetheriallp, I.aetherialwraps, I.gsofkings, I.mkwarhammer]
@@ -157,10 +159,10 @@ class Main():
             [0, 0, 0, 0, 0, 0, 0, 0, 162, 0, 0, 0, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 15DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 186, 187, 188, 0, 189, 0, 0, 0, 0, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 0, 208, 0, 0, 0, 0, 0, 0, 0],  # 16DONE
             [0, 0, 0, 0, 0, 0, 0, 209, 210, 211, 212, 0, 0, 0, 213, 214, 215, 0, 0, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 0, 232, 233, 0, 0, 0, 0, 0],  # 17DONE
-            [0, 0, 0, 0, 0, 0, 0, 234, 235, 236, 0, 0, 0, 237, 238, 239, 240, 241, 0, 0, 0, 0, 0, 0, 0, 242, 243, 244, 245, 246, 247, 248, 249, 250, 0, 251, 252, 253, 0, 0, 0, 0, 0, 0],  # 18
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 19
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 20
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 0, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 21
+            [0, 0, 0, 0, 0, 0, 0, 234, 235, 236, 0, 0, 0, 237, 238, 239, 240, 241, 0, 0, 0, 0, 0, 0, 0, 242, 243, 244, 245, 246, 247, 248, 249, 250, 0, 251, 252, 253, 0, 0, 0, 0, 0, 0],  # 18DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 0, 0, 266, 267, 268, 269, 270, 271, 272, 273, 274, 0, 275, 276, 277, 278, 0, 0, 0, 0, 0],  # 19DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 0, 294, 295, 296, 297, 298, 299, 300, 301, 302, 0, 0, 0, 303, 304, 0, 0, 0, 0, 0],  # 20DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 0, 0, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 0, 0, 0, 0, 0, 0, 0],  # 21DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 0, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 22
             [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 23
             [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 0, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 24
@@ -189,6 +191,15 @@ class Main():
             {'item': I.broketooth, 'minqty': 1, 'maxqty': 10, 'dc': 90},
             {'item': I.disasterblade, 'minqty': 1, 'maxqty': 1, 'dc': 25}
         ]
+    def clearinv(self):
+        x = input("Do you really want to clear the inventory?(Y/N): ").upper()
+        if x == "Y":
+            self.inventory = []
+        elif x == "N":
+            print('Canceled inventory clear')
+        else:
+            x = input("You didn't type Y or N")
+            self.clearinv()
     def help(self):
         system("cls")
         print("""
@@ -216,22 +227,26 @@ class Main():
             -----------------------------------------
             """)
     def drop(self):
-        y = randint(0, 100)
-        print(y)
         if self.status == 'questcombat':
             if self.fighting.qi is not None:
                 self.inventory.append(self.fighting.qi)
                 print("%s added to inventory" % self.fighting.qi.name)
                 self.status = 'normal'
-        else:
-            if y >= 25:
-                if self.fighting.dp != []:
-                    x = random.choice(self.fighting.dp)
-                    print("It dropped a/an %s" % x.name)
-                    if x in IDB.stackablelist:
-                        self.stackinv[x] += 1
-                    else:
-                        self.inventory.append(x)
+
+        for d in self.fighting.dp:
+            for key in d:
+                if key == 'dc':
+                    y = random.randint(0, 100)
+                    if y <= d['dc']:
+                        x = random.randint(d['minqty'], d['maxqty'])
+                        print("Dropped " + str(x) + " " + d['item'].name + "(s)")
+                        if d['item'] in self.stackinv:
+                            self.stackinv[d['item']] += x
+                        else:
+                            a = 0
+                            while a < x:
+                                self.inventory.append(d['item'])
+                                a += 1
     def dropt(self):
         y = randint(0, 100)
         print(y)
@@ -241,13 +256,20 @@ class Main():
                 print("%s added to inventory" % self.fighting.qi.name)
                 self.status = 'normal'
 
-        for d in self.wolfdt:
+        for d in self.fighting.dp:
             for key in d:
                 if key == 'dc':
                     y = random.randint(0, 100)
                     if y <= d['dc']:
                         x = random.randint(d['minqty'], d['maxqty'])
-                        print("Dropped " + str(x) + d['item'].name + "(s)")
+                        print("Dropped " + str(x) + " " + d['item'].name + "(s)")
+                        if d['item'] in self.stackinv:
+                            self.stackinv[d['item']] += x
+                        else:
+                            a = 0
+                            while a < x:
+                                self.inventory.append(d['item'])
+                                a += 1
     def renc(self):
         x = random.randint(1, 5)
         for y in self.reclist:
@@ -348,26 +370,20 @@ class Main():
          Leave
         >█████████████████████████████████████<
         """ % (self.location.name, w, x, y, z))
-        goto = input("> ")
-        if goto == "General store":
+        goto = input("> ").upper()
+        if goto == "GENERAL STORE":
             self.clear()
             self.genstoredisp()
-        elif goto == "general store":
-            self.clear()
-            self.genstoredisp()
-        elif goto == "General Store":
-            self.clear()
-            self.genstoredisp()
-        elif goto == "Bank":
+        elif goto == "BANK":
             self.clear()
             self.bankdisp()
-        elif goto == "Gunsmith":
+        elif goto == "GUNSMITH":
             self.clear()
             self.gunsmithdisp()
-        elif goto == "Blacksmith":
+        elif goto == "BLACKSMITH":
             self.clear()
             self.blacksmithdisp()
-        elif goto == "Leave":
+        elif goto == "LEAVE":
             system("cls")
             print("You have left %s. Type 'town' to reenter." % self.location.name)
             self.location = None
@@ -437,8 +453,8 @@ class Main():
             else:
                 print("{0} - {1} gold".format(x.name, x.bp))
         print("-----------------------------------")
-        choice = input("(buy, sell, leave)> ")
-        if choice == "buy":
+        choice = input("(buy, sell, leave)> ").upper()
+        if choice == "BUY":
             system("cls")
             print("-----------------------------------")
             print("        %s General store           " % self.location.name)
@@ -446,9 +462,9 @@ class Main():
             for x in self.location.generalstore:
                 print(x.name)
             print("-----------------------------------")
-            buy = input("What would you like to buy?: ")
+            buy = input("What would you like to buy?: ").upper()
             for x in self.location.generalstore:
-                if buy == x.name:
+                if buy == x.name.upper():
                     if x.bp > self.gold:
                         u = x.bp - self.gold
                         print("You need %d more gold to afford that." % u)
@@ -469,7 +485,7 @@ class Main():
                 system("pause")
                 system("cls")
                 self.genstoredisp()
-        elif choice == "sell":
+        elif choice == "SELL":
             system("cls")
             print("-----------------------------------")
             print("        Your inventory             ")
@@ -477,9 +493,9 @@ class Main():
             for x in self.inventory:
                 print(x.name)
             print("-----------------------------------")
-            sell = input("What would you like to sell?: ")
+            sell = input("What would you like to sell?: ").upper()
             for x in self.inventory:
-                if sell == x.name:
+                if sell == x.name.upper():
                     if x in self.location.generalstore:
                         self.inventory.remove(x)
                         self.location.generalstore.append(x)
@@ -501,7 +517,7 @@ class Main():
                 system("pause")
                 system("cls")
                 self.genstoredisp()
-        elif choice == "leave":
+        elif choice == "LEAVE":
             print("You leave the general store.")
             system("pause")
             self.clear()
@@ -801,6 +817,12 @@ class Main():
         for x in dynlDB.northbeachesl:
             if x == self.worldspace[self.ypos][self.xpos]:
                 print(bDB.northbeaches.description)
+        for x in dynlDB.midbeachesl:
+            if x == self.worldspace[self.ypos][self.xpos]:
+                print(bDB.midbeaches.description)
+        for x in dynlDB.northwoodsl:
+            if x == self.worldspace[self.ypos][self.xpos]:
+                print(bDB.northwoods.description)
         print("Biome type: ")
     def gonorth(self):
         if self.worldspace[(self.ypos - 1)][self.xpos] == 0:
@@ -831,6 +853,8 @@ class Main():
     def gosouth(self):
         if self.worldspace[self.ypos + 1][self.xpos] == 0:
             print("You cannot go through this water without a boat!")
+        if self.worldspace[self.ypos + 1][self.xpos] in dynlDB.southcompwall:
+            print("You see a giant wall before you with banners that you do not recognize. There is no way for you to get through.")
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
             self.ypos += 1
@@ -855,7 +879,7 @@ class Main():
                     cprint(x.description, 'red')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def town(self):
-        for x in dynlDB.pointsofinterest:
+        for x in dynlDB.townsl:
             if x.pos == self.worldspace[self.ypos][self.xpos]:
                 input("You enter " + x.town.name + " and are welcomed through the gates...")
                 self.clear()
@@ -1143,8 +1167,9 @@ class Main():
         print("Defence: %d" % self.defence)
         for x in self.inventory:
             if x.type == 'map':
-                print("X Coordinate - %d" % self.xcoord)
-                print("Y Coordinate - %d" % self.ycoord)
+                print("X Coordinate - %d" % self.xpos)
+                print("Y Coordinate - %d" % self.ypos)
+                print("Area ID - %d" % self.worldspace[self.ypos][self.xpos])
                 break
         cprint("█████████████████████████████████████████", 'yellow')
         print("               Equipment                 ")
@@ -1577,6 +1602,7 @@ class Main():
 Commands = {
   'help': Main.help,
   'area': Main.area,
+  'ci': Main.clearinv,
   'inventory': Main.cinventory,
   'north': Main.gonorth,
   'read': Main.read,
