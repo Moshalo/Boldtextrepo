@@ -29,7 +29,7 @@ import pickle
 class Main():
     def __init__(self):
         #Character
-        system("title Time is now v0.5")
+        system("title Time is now v0.5.1")
         self.name = ""
         self.health = 100
         self.maxhealth = 100
@@ -93,12 +93,6 @@ class Main():
         self.xpcookingnext = 5
         self.xpalch = 0
         self.xpalchnext = 5
-        #CharacterMaterials
-        self.matiron = 9999
-        self.matcopper = 9999
-        self.mattin = 9999
-        self.matsteel = 9999
-        self.matwood = 999
         #QUESTS
         self.questlog = []
         self.compquests = []
@@ -301,10 +295,10 @@ class Main():
         system("cls")
         print("""
         -----------------------------------------
-                    Changelog v0.5A
+                    Changelog v0.5.1A
         - Crafting system implemented
         - Main worldspace implemented with towns
-        - FIRST BUILD RELEASED AS AN EARLY DEMO!!
+        - Dynamic drop table loot system
         -----------------------------------------
         """)
     def cinventory(self):
