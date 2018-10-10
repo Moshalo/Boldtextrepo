@@ -52,8 +52,12 @@ class dynl():
 
 class dynlDB:
     p12 = dynl(12, townDB.ttown, [], [], [], "The outskirts of Test Town..")
+    p13 = dynl(13, None, [], [], [], 'You see a town in the distance to the west.')
+    p25 = dynl(25, None, [], [], [], 'You see a town in the distance to the northeast')
+    p26 = dynl(26, None, [], [], [], 'You see a town in the distance to the north')
+    p27 = dynl(27, None, [], [], [], 'You see a town in the distance to the northwest')
     p42 = dynl(42, None, [], [], [EDB.fban, EDB.fban, EDB.fban], "A bandit camp lies ahead... type 'attack camp' if you want to fight")
-    pointsofinterest = [p42]
+    pointsofinterest = [p13, p25, p26, p27, p42]
     townsl = [p12]
     #BORDERS
     southcompwall = [320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330]

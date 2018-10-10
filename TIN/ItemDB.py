@@ -9,10 +9,12 @@ import colorama
 from colorama import Fore, Back, Style
 
 class ItemDB:
+    #CURRENCY
+    goldpiece = m("Gold Pieces", "currency", 0, 0, 0, 0, 'yellow', Style.BRIGHT, 1)
     #QUEST ITEMS
     carvedpistol = m("Carved Pistol", "quest", 0, 0, 0, 0, 'blue', Style.BRIGHT, 32000)
     # ---UTILITIES---
-    simplemap = m("Simple Map", 'map', 0, 0, 15, 6, 'white', Style.DIM, 1)
+    simplemap = m("Simple Map", 'map', 0, 0, 15, 6, 'white', Style.DIM, 2)
     #MiscItems
     bread = m("Loaf of bread", "food", 5, 5, 2, 1, 'white', Style.DIM, 10)
     wberries = m("Wild Berries", "food", 10, 2, 5, 3, 'white', Style.DIM, 11)
@@ -107,4 +109,4 @@ class ItemDB:
     itemlist = [leatherboots, shodpistol, corruptedroyalsw, guildedcpants, guildedcc, guildedccp, guildedboots, guildedhelm, guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
                 flpistol, gppistol, guildpistol, clothcap, clothpants, clothshirt, leathertunic, leathcolbp, aetherialcp, aetherialhelm, aetheriallp, aetherialwraps, ruggedshoes,
                 lowhp, hp, medhp, largehp, smaethhp, aethhp, largeaethhp, pureaethhp, bjarncp, goldkho, redsteelnightblade, carvedpistol, simplemap]
-    stackablelist = [coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]
+    stackablelist = [goldpiece, coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]

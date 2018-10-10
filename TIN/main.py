@@ -34,8 +34,8 @@ class Main():
         self.name = ""
         self.health = 100
         self.maxhealth = 100
-        self.xpos = 29
-        self.ypos = 10
+        self.xpos = 16
+        self.ypos = 8
         self.rs = None
         self.ms= None
         self.hs = None
@@ -111,6 +111,9 @@ class Main():
         self.gold = 0
         #Townstuffs/
         self.inventory = [I.smaethhp, I.smaethhp, SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
+        self.wallet = {
+            I.goldpiece: 10
+        }
         self.stackinv = {
             I.aethdust: 0,
             I.centhorn: 0,
@@ -124,7 +127,7 @@ class Main():
             I.ironingot: 1,
             I.woodrod: 1,
             I.sharpcanine: 0,
-            I.broketooth: 0
+            I.broketooth: 0,
         }
         #self.inventory = [I.bread, I.ironsword, I.ironlsword, I.leathertunic, I.steelsword, I.steellsword, I.leathcolbp, I.bsteelsword, I.bsteellsword, I.disasterblade, I.sfsword,
                          #I.bladeofeternity, I.aetherialhelm, I.aetherialcp, I.aetheriallp, I.aetherialwraps, I.gsofkings, I.mkwarhammer]
@@ -144,8 +147,8 @@ class Main():
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 5DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 7, 0, 8, 9, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 6DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 13, 14, 15, 16, 17, 18, 19, 0, 20, 21, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 7DONE
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 24, 0, 25, 26, 27, 28, 29, 30, 31, 32, 0, 33, 34, 0, 0, 35, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 9DONE!!
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 0, 0, 0, 48, 49, 50, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 8DONE
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 24, 0, 25, 26, 27, 28, 29, 30, 31, 32, 0, 33, 34, 0, 0, 35, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 8DONE!!
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 0, 0, 0, 48, 49, 50, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 9DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 0, 0, 63, 64, 65, 66, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 10DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 11DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 12DONE
@@ -305,7 +308,7 @@ class Main():
     def cinventory(self):
         system("cls")
         cprint("█████████████████████████████████████████", 'green')
-        cprint(Style.BRIGHT + "               Inventory                 ", 'green')
+        cprint(Style.BRIGHT + "               Inventory                 ", 'white')
         for x in self.inventory:
             if x.type != 'scroll':
                 cprint("- " + x.style + x.name, x.color)
@@ -315,6 +318,12 @@ class Main():
             cprint(Style.BRIGHT + "Gold: %d" % self.gold, 'yellow')
         if self.ammo > 0:
             print(Style.BRIGHT + "Ammo: %d" % self.ammo)
+        cprint("█████████████████████████████████████████", 'green')
+        cprint(Style.BRIGHT + "               Money Pouch                 ", 'yellow')
+        for i in self.wallet:
+            if self.wallet[i] > 0:
+                cprint(i.style + i.name, i.color, end="")
+                print(" (x" + str(self.wallet[i]) + ")")
         cprint("█████████████████████████████████████████", 'green')
         cprint(Style.BRIGHT + "               Stackables                 ", 'white')
         for i in self.stackinv:
@@ -468,8 +477,11 @@ class Main():
                         self.genstoredisp()
                     else:
                         print("You bought %s for %d gold." % (x.name, x.bp))
+                        if x in self.stackinv:
+                            self.stackinv[x] += 1
+                        else:
+                            self.inventory.append(x)
                         self.location.generalstore.remove(x)
-                        self.inventory.append(x)
                         self.gold -= x.bp
                         system("pause")
                         system("cls")
@@ -830,7 +842,7 @@ class Main():
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(x.description, 'red')
+                    cprint(x.description, 'yellow')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def goeast(self):
         if self.worldspace[self.ypos][(self.xpos + 1)] == 0:
@@ -843,7 +855,7 @@ class Main():
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(x.description, 'red')
+                    cprint(x.description, 'yellow')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gosouth(self):
         if self.worldspace[self.ypos + 1][self.xpos] == 0:
@@ -858,7 +870,7 @@ class Main():
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(x.description, 'red')
+                    cprint(x.description, 'yellow')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gowest(self):
         if self.worldspace[self.ypos][(self.xpos - 1)] == 0:
@@ -871,7 +883,7 @@ class Main():
                     cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(x.description, 'red')
+                    cprint(x.description, 'yellow')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def town(self):
         for x in dynlDB.townsl:
@@ -1647,7 +1659,7 @@ Commands = {
 p = Main()
 p.clear()
 cprint(Style.DIM + "█████████████████████████████████████████", 'green')
-cprint(Style.BRIGHT + "         The Time is Now v0.5", 'green')
+cprint(Style.BRIGHT + "         The Time is Now v0.5.1", 'green')
 cprint(Style.BRIGHT + "1. New Game", 'green')
 cprint(Style.BRIGHT + "2. Load game", 'green')
 cprint(Style.BRIGHT + "3. About", 'green')
