@@ -16,7 +16,6 @@ class biomeDB():
     northmountains = biome("Northern Mountains", [], 0, 18, "Frozen stacks of rock and snow, the winds billowing through the pass like an ancient chant...")
 
 
-
 class town():
     def __init__(self, name, pos, bank, bankamount, blacksmith, gunsmith, generalstore):
         self.name = name
