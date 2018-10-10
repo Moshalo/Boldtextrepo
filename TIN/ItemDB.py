@@ -99,7 +99,8 @@ class ItemDB:
     aetheriallp = a("Aetherial Legwraps", "legs", 27, 45, 28000, 18000, 'magenta', Style.BRIGHT, 36, 602)
     # ---BOOTS---
     ruggedshoes = a("Rugged shoes", "foot", 1, 0, 10, 5, 'white', Style.DIM, 1, 2003)
-    leatherboots = a("Leather boots", 'food', 2, 0, 20, 10, 'white', Style.DIM, 1, 2004)
+    leatherboots = a("Leather boots", 'foot', 2, 0, 20, 10, 'white', Style.DIM, 1, 2004)
+    armleatherboots = a("Armored Leather boots", 'foot', 21, 0, 12000, 6000, 'white', Style.DIM, 1, 2005)
     aetherialwraps = a("Aetherial Footwraps", "foot", 22, 5, 24000, 14000, 'magenta', Style.BRIGHT, 36, 603)
     guildedboots = a("Guilded Boots", "foot", 30, 10, 28000, 14000, 'yellow', Style.BRIGHT, 38, 718)
 

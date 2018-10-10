@@ -37,7 +37,14 @@ class enemyDB:
 
     #High Tier Enemies
     enraeth = e("Enraged Aetherial", 250, randint(250, 350), 350, 120, 45, 0, [], 1110)
-    corruptroyalsquire = e("Corrupted Royal Squire", 200, randint(200, 400), 400, 115, 30, 0, [], 1119)
+    corruptroyalsquire = e("Corrupted Royal Squire", 200, randint(200, 400), 400, 115, 30, 0, [
+        {'item': I.redsteelnightblade, 'minqty': 1, 'maxqty': 1, 'dc': 18},
+        {'item': I.guildedcc, 'minqty': 1, 'maxqty': 1, 'dc': 15},
+        {'item': I.guildedccp, 'minqty': 1, 'maxqty': 1, 'dc': 15},
+        {'item': I.guildedcpants, 'minqty': 1, 'maxqty': 1, 'dc': 15},
+        {'item': I.armleatherboots, 'minqty': 1, 'maxqty': 1, 'dc': 20},
+        {'item': I.corruptedroyalsw, 'minqty': 1, 'maxqty': 1, 'dc': 12},
+    ], 1119)
     corruptroyalknight = e("Corrupted Royal Knight", 400, randint(400, 500), 500, 180, 80, 0, [], 1120)
 
     enemylist = [fban, wolf, mugger, siban, armcent, enraeth, corruptroyalknight, corruptroyalsquire]
@@ -52,19 +59,6 @@ class enemyDB:
     morkool = boss("Morkool the Unchained", 'red', Style.BRIGHT, 6000, 6000, 350, 110, [], [spec.mkhambash, spec.mkhambash, spec.mkkick, spec.mkhambash], [], 20, [], 1)
 
 
-    #DROP TABLES(WIP)
-    wofldt = [
-        {'item': I.wolfpelt, 'minqty': 1, 'maxqty': 2, 'dc': 100},
-        {'item': I.sharpcanine, 'minqty': 1, 'maxqty': 5, 'dc': 75},
-        {'item': I.broketooth, 'minqty': 1, 'maxqty': 10, 'dc': 80}
-    ]
-    muggerdt = [
-        {'item': I.irondagger, 'minqty': 1, 'maxqty': 2, 'dc': 40},
-        {'item': I.clothshirt, 'minqty': 1, 'maxqty': 1, 'dc': 30},
-        {'item': I.leathertunic, 'minqty': 1, 'maxqty': 1, 'dc': 20},
-        {'item': I.clothpants, 'minqty': 1, 'maxqty': 1, 'dc': 25},
-        {'item': I.leatherboots, 'minqty': 1, 'maxqty': 1, 'dc': 25},
-        {'item': I.muggercap, 'minqty': 1, 'maxqty': 1, 'dc': 25}
-    ]
+    #OTHER DROP TABLES(WIP)
     fbandt = []
     #Low-Mid Tier Drop tables
