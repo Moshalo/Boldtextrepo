@@ -908,24 +908,25 @@ class Main():
     def gosouth(self):
         if self.worldspace[self.ypos + 1][self.xpos] == 0:
             print("You cannot go through this water without a boat!")
-        if self.worldspace[self.ypos + 1][self.xpos] in dynlDB.southcompwall:
-            print("You see a giant wall before you with banners that you do not recognize. There is no way for you to get through.")
         else:
-            #print(str(self.worldspace[self.ypos][self.xpos]))
-            self.ypos += 1
-            for x in dynlDB.townsl:
-                if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
-            for x in dynlDB.pointsofinterest:
-                if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(x.description, 'yellow')
-                    if x.enemies != []:
-                        print("Fight")
-                        for z in x.enemies:
-                            self.status = 'fighting'
-                            self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
-                            self.fightdisp()
-                            self.fightform()
+            if self.worldspace[self.ypos + 1][self.xpos] in dynlDB.southcompwall:
+                print("You see a giant wall before you with banners that you do not recognize. There is no way for you to get through.")
+            else:
+                #print(str(self.worldspace[self.ypos][self.xpos]))
+                self.ypos += 1
+                for x in dynlDB.townsl:
+                    if x.pos == self.worldspace[self.ypos][self.xpos]:
+                        cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                for x in dynlDB.pointsofinterest:
+                    if x.pos == self.worldspace[self.ypos][self.xpos]:
+                        cprint(x.description, 'yellow')
+                        if x.enemies != []:
+                            print("Fight")
+                            for z in x.enemies:
+                                self.status = 'fighting'
+                                self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
+                                self.fightdisp()
+                                self.fightform()
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gowest(self):
         if self.worldspace[self.ypos][(self.xpos - 1)] == 0:
