@@ -39,16 +39,16 @@ class Main():
         self.rs = None
         self.ms= None
         self.hs = None
-        self.cs = None
-        self.ps = None
-        self.fs = None
+        self.cs = I.clothshirt
+        self.ps = I.clothpants
+        self.fs = I.ruggedshoes
         self.location = None
         self.npc = None
         self.damage = 0
         self.gundamage = 0
         self.shot = 0
         self.reloading = 0
-        self.defence = 0
+        self.defence = 5
         self.status = 'normal'
         self.fighting = None
         self.battling = None
@@ -110,7 +110,7 @@ class Main():
         #Inventory
         self.gold = 0
         #Townstuffs/
-        self.inventory = [I.smaethhp, I.smaethhp, SDB.recsmallhp, I.ironsword, I.clothcap, I.leathertunic, I.clothpants, I.ruggedshoes]
+        self.inventory = [I.irondagger]
         self.wallet = {
             I.goldpiece: 10
         }
@@ -215,7 +215,14 @@ class Main():
         - "questlog": Displays your current quests
         - "changelog": Displays a list of changes
         for the current version.
+        - "search": Search the area you're in
+        - "examine": Examine an item from the inventory
         -----------------------------------------
+                        Information
+        - When you go in a certain direction
+        (north, east, south, west) it's 1 'pace'.
+        NPC's will refer to it as a pace, so just remember
+        that.
         """)
         if self.devenabled == 1:
             print("""
@@ -224,6 +231,17 @@ class Main():
             - "dev1": Get into combat
             -----------------------------------------
             """)
+    def search(self):
+        for x in dynlDB.pointsofinterest:
+            if x.pos == self.worldspace[self.ypos][self.xpos]:
+                if x.items == []:
+                    print("You found no items of interest in the area..")
+                else:
+                    print(x.foundlootdesc)
+                    for y in x.items:
+                        x.items.remove(y)
+                        self.inventory.append(y)
+                        print(y.name + " added to inventory.")
     def drop(self):
         if self.status == 'questcombat':
             if self.fighting.qi is not None:
@@ -240,6 +258,8 @@ class Main():
                         print("Dropped " + str(x) + " " + d['item'].name + "(s)")
                         if d['item'] in self.stackinv:
                             self.stackinv[d['item']] += x
+                        if d['item'] in self.wallet:
+                            self.wallet[d['item']] += x
                         else:
                             a = 0
                             while a < x:
@@ -268,6 +288,25 @@ class Main():
                             while a < x:
                                 self.inventory.append(d['item'])
                                 a += 1
+    def examine(self):
+        self.cinventory()
+        ex = input("Which item would you like to examine?: ").upper()
+        self.clear()
+        self.clear()
+        for x in self.inventory:
+            if ex == x.name.upper():
+                cprint("----------------------------------------------", 'green')
+                cprint(x.style + x.name, x.color)
+                cprint("----------------------------------", 'green')
+                if x.type == 'mwep':
+                    print("Damage: " + str(x.damage))
+                if x.type != 'mwep':
+                    print("Defence: " + str(x.defence))
+                if x.type != 'mwep':
+                    print("Health Boost: " + str(x.health))
+                cprint("----------------------------------", 'green')
+                cprint("----------------------------------------------", 'green')
+                break
     def renc(self):
         x = random.randint(1, 5)
         for y in self.reclist:
@@ -469,8 +508,8 @@ class Main():
             buy = input("What would you like to buy?: ").upper()
             for x in self.location.generalstore:
                 if buy == x.name.upper():
-                    if x.bp > self.gold:
-                        u = x.bp - self.gold
+                    if x.bp > self.wallet[I.goldpiece]:
+                        u = x.bp - self.wallet[I.goldpiece]
                         print("You need %d more gold to afford that." % u)
                         system("pause")
                         system("cls")
@@ -482,16 +521,11 @@ class Main():
                         else:
                             self.inventory.append(x)
                         self.location.generalstore.remove(x)
-                        self.gold -= x.bp
+                        self.wallet[I.goldpiece] -= x.bp
                         system("pause")
                         system("cls")
                         self.genstoredisp()
                         break
-            else:
-                print("The General store does not have that item.")
-                system("pause")
-                system("cls")
-                self.genstoredisp()
         elif choice == "SELL":
             system("cls")
             print("-----------------------------------")
@@ -506,7 +540,7 @@ class Main():
                     if x in self.location.generalstore:
                         self.inventory.remove(x)
                         self.location.generalstore.append(x)
-                        self.gold += x.sp
+                        self.wallet[I.goldpiece] += x.sp
                         print("You sold a %s to the General store." % x.name)
                         system("pause")
                         system("cls")
@@ -515,7 +549,7 @@ class Main():
                     else:
                         self.inventory.remove(x)
                         self.location.generalstore.append(x)
-                        self.gold += (x.sp)
+                        self.wallet[I.goldpiece] += (x.sp)
                         print("You sold a %s to the General store." % x.name)
                         self.genstoredisp()
                         break
@@ -843,6 +877,13 @@ class Main():
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
+                    if x.enemies != []:
+                        print("Fight")
+                        for z in x.enemies:
+                            self.status = 'fighting'
+                            self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
+                            self.fightdisp()
+                            self.fightform()
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def goeast(self):
         if self.worldspace[self.ypos][(self.xpos + 1)] == 0:
@@ -856,6 +897,13 @@ class Main():
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
+                    if x.enemies != []:
+                        print("Fight")
+                        for z in x.enemies:
+                            self.status = 'fighting'
+                            self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
+                            self.fightdisp()
+                            self.fightform()
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gosouth(self):
         if self.worldspace[self.ypos + 1][self.xpos] == 0:
@@ -871,6 +919,13 @@ class Main():
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
+                    if x.enemies != []:
+                        print("Fight")
+                        for z in x.enemies:
+                            self.status = 'fighting'
+                            self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
+                            self.fightdisp()
+                            self.fightform()
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gowest(self):
         if self.worldspace[self.ypos][(self.xpos - 1)] == 0:
@@ -884,6 +939,13 @@ class Main():
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
+                    if x.enemies != []:
+                        print("Fight")
+                        for z in x.enemies:
+                            self.status = 'fighting'
+                            self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
+                            self.fightdisp()
+                            self.fightform()
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def town(self):
         for x in dynlDB.townsl:
@@ -1229,6 +1291,11 @@ class Main():
                 self.combatenemyturn()
             elif phit >= self.fighting.health:
                 print("You killed the %s!" % self.fighting.name)
+                for x in dynlDB.pointsofinterest:
+                    if x.pos == self.worldspace[self.ypos][self.xpos]:
+                        for y in x.enemies:
+                            if self.fighting.name == y.name:
+                                x.enemies.remove(y)
                 self.drop()
                 self.playerhit = ""
                 self.enemyhit = ""
@@ -1254,8 +1321,9 @@ class Main():
             if self.health == 1:
                 self.enemyhit = ("The %s is not powerful enough to deliver a finishing blow. Keep fighting!" % self.fighting.name)
             else:
-                self.health -= 1
-                self.enemyhit = ("The %s hit you for 1" % self.fighting.name)
+                x = random.randint(0, 5)
+                self.health -= x
+                self.enemyhit = ("The " + self.fighting.name + " hit you for " + str(x) + ".")
             if self.fighting != None:
                 system("cls")
                 self.fightdisp()
@@ -1325,23 +1393,23 @@ class Main():
                 self.fightform()
     def save(self):
         save = input("What would you like to name the save?(This will overwrite): ")
-        pickle.dump([self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
+        pickle.dump([self.wallet, self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
                      self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
         #City and town data
-        pickle.dump([TDB.ttown.bankamount, TDB.ttown.generalstore, TDB.ttown.blacksmith, TDB.ttown.gunsmith], open("{0}.tin".format(save + "cd"), "wb"))
+        pickle.dump([TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith], open("{0}.tin".format(save + "cd"), "wb"))
         #POIData
-        pickle.dump([dynlDB.p12.description], open("{0}.tin".format(save + "poi"), "wb"))
+        pickle.dump([dynlDB.p12.description, dynlDB.p27.description, dynlDB.p27.items, dynlDB.p27.enemies], open("{0}.tin".format(save + "poi"), "wb"))
     def devsave(self):
         pickle.dump([self.eitemslist, self.inventory, self.norag, self.gabesh, self.yoeran, self.litau, self.uash, self.shreeda, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xcoord, self.ycoord, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled], open("devsave.tin", "wb"))
     def devload(self):
         self.eitemslist, self.inventory, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled, TDB.ttown = pickle.load(open("devsave.tin", "rb"))
     def loadt(self):
         load = input("What file would you like to load(Doesn't exist = Crash): ")
-        self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
+        self.wallet, self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
         #City and town data
-        TDB.ttown.bankamount, TDB.ttown.generalstore, TDB.ttown.blacksmith, TDB.ttown.gunsmith = pickle.load(open("{0}.tin".format(load + "cd"), "rb"))
+        TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith = pickle.load(open("{0}.tin".format(load + "cd"), "rb"))
         #POIData
-        dynlDB.p12.description = pickle.load(open("{0}.tin".format(load + "poi"), "rb"))
+        dynlDB.p12.description, dynlDB.p27.description, dynlDB.p27.items, dynlDB.p27.enemies = pickle.load(open("{0}.tin".format(load + "poi"), "rb"))
     def dev4(self):
         self.fighting = self.wban
         self.status = 'combat'
@@ -1456,7 +1524,7 @@ class Main():
             #> %s
             #> %s
            # -----------------------------------------
-            #""" % (self.fighting.name, self.fighting.health, self.health, self.playerhit, self.enemyhit))
+            #""" % (self.fighting.name, self.fighting.health, self.health, self.playerhit, self.enemyhit)
     def fightform(self):
         if self.rs != None:
             cc = input("Type 'a' to attack or 's' to shoot:")
@@ -1617,6 +1685,7 @@ Commands = {
   'east': Main.goeast,
   'south': Main.gosouth,
   'west': Main.gowest,
+  'search': Main.search,
   'equip': Main.equip,
   'status': Main.status,
   'clear': Main.clear,
@@ -1625,6 +1694,7 @@ Commands = {
   'dev2': Main.dev2,
   'dev3': Main.dev3,
   'changelog': Main.changelog,
+  'examine': Main.examine,
   '20657': Main.enabledev,
   'ddev': Main.disabledev,
   'save': Main.save,
@@ -1668,12 +1738,16 @@ menuchoice = input("Type the number: ")
 if menuchoice == "1":
     p.name = input("What is your name? ")
     p.clear()
-    print("%s wakes up in the middle of a forest. Try to get to civilization" % p.name)
+    print("""
+    You wake up groggy and in pain, your gold and your map have been stolen
+    off of you. You can barely remember what happened in your drunken stupor but
+    you know you were robbed by a mugger when you left the tavern from Narja. 
+    Maybe just a little too much to drink?.. Either way, you see the smoke 
+    from a campfire creeping up into the air in the distant east. Maybe thats
+    where the man who mugged you went? It's up to you to decide if you chase after
+    him, or if you forget about the whole thing for now.
+    """)
     cprint(Style.BRIGHT + "(type help to get a list of actions)", 'yellow')
-    if p.name == "Developer":
-        p.defence = 30
-    else:
-        p.defence = 0
 elif menuchoice == "2":
     p.loadt()
 elif menuchoice == "3":
