@@ -62,6 +62,10 @@ class Main():
         self.statswords = 1
         self.statblock = 1
         self.statdodge = 1
+        self.hunger = 100
+        self.maxhunger = 100
+        self.thirst = 100
+        self.maxthirst = 100
         #CharacterSkills(
         self.skillblacksmith = 1
         self.skillgunsmith = 1
@@ -110,6 +114,7 @@ class Main():
         #Inventory
         self.gold = 0
         #Townstuffs/
+        self.knownlocations = [TDB.narja]
         self.inventory = [I.irondagger]
         self.wallet = {
             I.goldpiece: 10
@@ -384,6 +389,23 @@ class Main():
         for x in self.compquests:
             cprint("- " + x.name)
         cprint("█████████████████████████████████████████", 'blue')
+    def checkmap(self):
+        self.clear()
+        cprint("█████████████████████████████████████████", 'yellow')
+        print("                  Map                 ")
+        for x in self.inventory:
+            if x.type == 'map':
+                print("X Coordinate - %d" % self.xpos)
+                print("Y Coordinate - %d" % self.ypos)
+                print("Area ID - %d" % self.worldspace[self.ypos][self.xpos])
+        cprint("█████████████████████████████████████████", 'yellow')
+        print("               Locations               ")
+        cprint("█████████████████████████████████████████", 'yellow')
+        for y in self.inventory:
+            if y.type == 'map':
+                for x in self.knownlocations:
+                    print(x.name + ": X - " + str(x.xpos) + ", Y - " + str(x.ypos))
+        cprint("█████████████████████████████████████████", 'yellow')
     def towndisp(self):
         if self.location.bank > 0:
             w = "Bank"
@@ -1683,6 +1705,7 @@ Commands = {
   'north': Main.gonorth,
   'read': Main.read,
   'town': Main.town,
+  'checkmap': Main.checkmap,
   'east': Main.goeast,
   'south': Main.gosouth,
   'west': Main.gowest,

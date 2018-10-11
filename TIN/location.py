@@ -17,28 +17,32 @@ class biomeDB():
 
 
 class town():
-    def __init__(self, name, pos, bank, bankamount, blacksmith, gunsmith, generalstore):
+    def __init__(self, name, pos, xpos, ypos, bank, bankamount, blacksmith, gunsmith, generalstore, known):
         self.name = name
         self.pos = pos
+        self.xpos = xpos
+        self.ypos = ypos
         self.bank = bank
         self.bankamount = bankamount
         self.blacksmith = blacksmith
         self.gunsmith = gunsmith
         self.generalstore = generalstore
+        self.known = known
 
 class camp():
-    def __init__(self, name, pos, enemies, endloot, description):
+    def __init__(self, name, pos, enemies, endloot, known, description):
         self.name = name
         self.pos = pos
         self.enemies = enemies
         self.endloot = endloot
+        self.known = known
         self.description = description
 
 class campDB():
-    bcamp1 = camp("Bandit Camp", 42, [], [], "A small campsite with bandits around the campfire..")
+    bcamp1 = camp("Bandit Camp", 42, [], [], False, "a small campsite with bandits around the campfire..")
 
 class townDB():
-    narja = town("Narja", 12, True, 60000, [], [], [I.wolfpelt, I.bread, I.bread])
+    narja = town("Narja", 12, 16, 7, True, 60000, [], [], [I.wolfpelt, I.bread, I.bread], True)
 
 class dynl():
     def __init__(self, pos, town, locations, npcs, enemies, items, description, foundlootdesc):
