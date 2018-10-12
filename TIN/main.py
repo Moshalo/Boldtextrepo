@@ -117,20 +117,20 @@ class Main():
         self.knownlocations = [TDB.narja]
         self.inventory = [I.irondagger]
         self.wallet = {
-            I.goldpiece: 10
+            I.goldpiece: 0
         }
         self.stackinv = {
             I.aethdust: 0,
             I.centhorn: 0,
             I.wolfpelt: 0,
-            I.bottlewater: 3,
-            I.salt: 3,
+            I.bottlewater: 1,
+            I.salt: 0,
             I.potatoweed: 0,
-            I.wberries: 6,
-            I.coal: 3,
+            I.wberries: 2,
+            I.coal: 0,
             I.ironore: 0,
-            I.ironingot: 1,
-            I.woodrod: 1,
+            I.ironingot: 0,
+            I.woodrod: 0,
             I.sharpcanine: 0,
             I.broketooth: 0,
         }
@@ -339,6 +339,20 @@ class Main():
                         self.health = self.maxhealth
                 print("You consumed the %s" % z.name)
                 break
+        for i in IDB.stackablelist:
+            if x == i.name.upper():
+                if i in self.stackinv:
+                    if self.stackinv[i] < 1:
+                        print("You do not have that item.")
+                        break
+                    else:
+                        self.stackinv[i] -= 1
+                        self.health += i.hh
+                        if i.type != 'spotion':
+                            if self.health > self.maxhealth:
+                                self.health = self.maxhealth
+                        print("You consumed the %s" % i.name)
+                        break
     def changelog(self):
         system("cls")
         print("""
@@ -895,7 +909,12 @@ class Main():
             self.ypos -= 1
             for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                    if x.town.known is True:
+                        cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                    else:
+                        x.town.known = True
+                        cprint(Style.BRIGHT + "You have discovered " + x.town.name + "! Type 'town' to enter..", 'green')
+                        self.knownlocations.append(x.town)
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
@@ -915,7 +934,12 @@ class Main():
             self.xpos += 1
             for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                    if x.town.known is True:
+                        cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                    else:
+                        x.town.known = True
+                        cprint(Style.BRIGHT + "You have discovered " + x.town.name + "! Type 'town' to enter..", 'green')
+                        self.knownlocations.append(x.town)
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
@@ -938,7 +962,13 @@ class Main():
                 self.ypos += 1
                 for x in dynlDB.townsl:
                     if x.pos == self.worldspace[self.ypos][self.xpos]:
-                        cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                        if x.town.known is True:
+                            cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                        else:
+                            x.town.known = True
+                            cprint(Style.BRIGHT + "You have discovered " + x.town.name + "! Type 'town' to enter..",
+                                   'green')
+                            self.knownlocations.append(x.town)
                 for x in dynlDB.pointsofinterest:
                     if x.pos == self.worldspace[self.ypos][self.xpos]:
                         cprint(x.description, 'yellow')
@@ -958,7 +988,12 @@ class Main():
             self.xpos -= 1
             for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
-                    cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                    if x.town.known is True:
+                        cprint(Style.DIM + x.town.name + " is in the area. Type 'town' to enter..", 'green')
+                    else:
+                        x.town.known = True
+                        cprint(Style.BRIGHT + "You have discovered " + x.town.name + "! Type 'town' to enter..", 'green')
+                        self.knownlocations.append(x.town)
             for x in dynlDB.pointsofinterest:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
@@ -1419,7 +1454,7 @@ class Main():
         pickle.dump([self.wallet, self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
                      self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
         #City and town data
-        pickle.dump([TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith], open("{0}.tin".format(save + "cd"), "wb"))
+        pickle.dump([TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith, TDB.narja.known, TDB.lorasu.bankamount, TDB.lorasu.generalstore, TDB.lorasu.blacksmith, TDB.lorasu.gunsmith, TDB.lorasu.known], open("{0}.tin".format(save + "cd"), "wb"))
         #POIData
         pickle.dump([dynlDB.p12.description, dynlDB.p27.description, dynlDB.p27.items, dynlDB.p27.enemies], open("{0}.tin".format(save + "poi"), "wb"))
     def devsave(self):
@@ -1430,7 +1465,7 @@ class Main():
         load = input("What file would you like to load(Doesn't exist = Crash): ")
         self.wallet, self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
         #City and town data
-        TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith = pickle.load(open("{0}.tin".format(load + "cd"), "rb"))
+        TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith, TDB.narja.known, TDB.lorasu.bankamount, TDB.lorasu.generalstore, TDB.lorasu.blacksmith, TDB.lorasu.gunsmith, TDB.lorasu.known = pickle.load(open("{0}.tin".format(load + "cd"), "rb"))
         #POIData
         dynlDB.p12.description, dynlDB.p27.description, dynlDB.p27.items, dynlDB.p27.enemies = pickle.load(open("{0}.tin".format(load + "poi"), "rb"))
     def dev4(self):

@@ -29,7 +29,7 @@ class ItemDB:
     wolfpelt = m("Wolf Pelt", "craft", 0, 0, 30, 15, 'white', Style.DIM, 90002)
     sharpcanine = m("Sharp Canine", "craft", 0, 0, 10, 5, 'white', Style.DIM, 90003)
     broketooth = m("Broken Tooth", "craft", 0, 0, 5, 2, 'white', Style.DIM, 90004)
-    bottlewater = m("Bottle of Water", "craft", 0, 0, 20, 10, 'white', Style.DIM, 91000)
+    bottlewater = m("Bottle of Water", "craft", 0, 5, 20, 10, 'white', Style.DIM, 91000)
     salt = m("Salt", "craft", 0, 0, 5, 2, 'white', Style.DIM, 91001)
     potatoweed = m("Potato Weed", "craft", 0, 0, 15, 7, 'white', Style.DIM, 91002)
     tumblethorn = m("Tumblethorn", "craft", 0, 0, 25, 12, 'white', Style.BRIGHT, 91003)
