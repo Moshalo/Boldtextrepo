@@ -23,6 +23,15 @@ class enemyDB:
         {'item': I.muggercap, 'minqty': 1, 'maxqty': 1, 'dc': 25},
         {'item': I.goldpiece, 'minqty': 25, 'maxqty': 25, 'dc': 100}
     ], 1)
+    bloodshieldmgguard = e("Bloodshield Guard", 120, randint(120, 145), 145, 45, 19, 0, [
+        {'item': I.irondagger, 'minqty': 1, 'maxqty': 2, 'dc': 40},
+        {'item': I.clothshirt, 'minqty': 1, 'maxqty': 1, 'dc': 30},
+        {'item': I.leathertunic, 'minqty': 1, 'maxqty': 1, 'dc': 20},
+        {'item': I.clothpants, 'minqty': 1, 'maxqty': 1, 'dc': 25},
+        {'item': I.leatherboots, 'minqty': 1, 'maxqty': 1, 'dc': 25},
+        {'item': I.muggercap, 'minqty': 1, 'maxqty': 1, 'dc': 25},
+        {'item': I.goldpiece, 'minqty': 25, 'maxqty': 25, 'dc': 100}
+    ], 1)
     #Low Tier Enemies
     mugger = e("Mugger", 40, randint(40, 60), 60, 3, 1, 0, [
         {'item': I.irondagger, 'minqty': 1, 'maxqty': 2, 'dc': 40},
@@ -57,7 +66,7 @@ class enemyDB:
     ], 1119)
     corruptroyalknight = e("Corrupted Royal Knight", 400, randint(400, 500), 500, 180, 80, 0, [], 1120)
 
-    enemylist = [sqmugger, fban, wolf, mugger, siban, armcent, enraeth, corruptroyalknight, corruptroyalsquire]
+    enemylist = [bloodshieldmgguard, sqmugger, fban, wolf, mugger, siban, armcent, enraeth, corruptroyalknight, corruptroyalsquire]
 
 
     #QUEST ENEMIES

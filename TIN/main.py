@@ -58,6 +58,9 @@ class Main():
         self.devenabled = 1
         self.ammo = 0
         self.devdropvar = 0
+        self.mgentered = False
+        self.mgguykilled = False
+        self.mgguypaid = False
         #CharacterStats(WIP)
         self.statswords = 1
         self.statblock = 1
@@ -1008,10 +1011,46 @@ class Main():
     def town(self):
         for x in dynlDB.townsl:
             if x.pos == self.worldspace[self.ypos][self.xpos]:
-                input("You enter " + x.town.name + " and are welcomed through the gates...")
-                self.clear()
-                self.location = x.town
-                self.towndisp()
+                if x.town.name == "Mourngarth":
+                    if self.mgentered == False:
+                        input("You start to walk up to the gates and are met by a heavily armored man with his sword drawn.")
+                        input("Stranger: 'Oy, if you want in this town, you're gunna hav'ta pay tax to the bloodshield gang. We run Mourngarth now. 100 Gold Pieces or bug off.")
+                        print("----------------------------------------------")
+                        if self.wallet[I.goldpiece] >= 100:
+                            print("1. Pay him 100 Gold")
+                        else:
+                            print("1. (You don't have enough gold to pay him.")
+
+                        print("2. Attack him to force your way into the town")
+                        print("3. Leave")
+                        print("----------------------------------------------")
+                        x = input("What do you want to do?(1/2/3): ")
+                        if x == '1':
+                            if self.wallet[I.goldpiece] >= 100:
+                                input("You pay him 100 gold")
+                                input("Alright, you can go on in, but keep yer head down and cause no trouble with the bloodshields!")
+                                input("You enter " + x.town.name + ".")
+                                self.clear()
+                                self.location = x.town
+                                self.towndisp()
+                                self.mgentered = True
+                            else:
+                                input("You don't have enough gold to pay him. You end up just leaving.")
+                                self.clear()
+                        elif x == '2':
+                            input("If it's a fight ye want, it's a fight ye get!")
+                            self.fighting = E.bloodshieldmgguard
+                            self.status = 'combat'
+                            self.fightdisp()
+                            self.fightform()
+                        elif x == '3':
+                            self.clear()
+                            print("He stares you down as you leave.")
+                else:
+                    input("You enter " + x.town.name + " and are welcomed through the gates...")
+                    self.clear()
+                    self.location = x.town
+                    self.towndisp()
     def bscraft(self):
         self.clear()
         print("-------------------------------")
@@ -1451,7 +1490,7 @@ class Main():
                 self.fightform()
     def save(self):
         save = input("What would you like to name the save?(This will overwrite): ")
-        pickle.dump([self.wallet, self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
+        pickle.dump([self.wallet[I.goldpiece], self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
                      self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
         #City and town data
         pickle.dump([TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith, TDB.narja.known, TDB.lorasu.bankamount, TDB.lorasu.generalstore, TDB.lorasu.blacksmith, TDB.lorasu.gunsmith, TDB.lorasu.known], open("{0}.tin".format(save + "cd"), "wb"))
@@ -1463,7 +1502,7 @@ class Main():
         self.eitemslist, self.inventory, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled, TDB.ttown = pickle.load(open("devsave.tin", "rb"))
     def loadt(self):
         load = input("What file would you like to load(Doesn't exist = Crash): ")
-        self.wallet, self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
+        self.wallet[I.goldpiece], self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
         #City and town data
         TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith, TDB.narja.known, TDB.lorasu.bankamount, TDB.lorasu.generalstore, TDB.lorasu.blacksmith, TDB.lorasu.gunsmith, TDB.lorasu.known = pickle.load(open("{0}.tin".format(load + "cd"), "rb"))
         #POIData

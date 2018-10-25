@@ -44,6 +44,7 @@ class campDB():
 class townDB():
     narja = town("Narja", 12, 16, 7, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], True)
     lorasu = town("Lorasu", 76, 20, 11, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], False)
+    mourngarth = town("Mourngarth", 169, 18, 15, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], False)
 
 class dynl():
     def __init__(self, pos, town, locations, npcs, enemies, items, description, foundlootdesc):
@@ -65,8 +66,9 @@ class dynlDB:
     p27 = dynl(27, None, [], [], [EDB.sqmugger], [I.simplemap], 'You see a town in the distance to the northwest', 'You searched a small chest the mugger left behind and found your map!')
     p42 = dynl(42, None, [], [], [EDB.fban, EDB.fban, EDB.fban], [], "A bandit camp lies ahead... type 'attack camp' if you want to fight", '')
     p76 = dynl(76, townDB.lorasu, [], [], [], [], "The outskirts of the town of Lorasu..", '')
+    p169 = dynl(169, townDB.mourngarth, [], [], [], [], "To outskirts of the town of Mourngarth...", '')
     pointsofinterest = [p13, p25, p26, p27, p42]
-    townsl = [p12, p76]
+    townsl = [p12, p76, p169]
     #BORDERS
     southcompwall = [320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330]
     #NORTH
