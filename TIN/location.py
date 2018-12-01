@@ -47,7 +47,7 @@ class townDB():
     mourngarth = town("Mourngarth", 169, 18, 15, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], False)
 
 class dynl():
-    def __init__(self, pos, town, locations, npcs, enemies, items, description, foundlootdesc, encbf, preencdesc, danger):
+    def __init__(self, pos, town, locations, npcs, enemies, items, description, foundlootdesc, encbf, preencdesc, danger, postcombdesc):
         self.pos = pos
         self.town = town
         self.locations = locations
@@ -60,16 +60,17 @@ class dynl():
         self.encbf = encbf
         self.preencdesc = preencdesc
         self.danger = danger
+        self.postcombdesc = postcombdesc
 
 class dynlDB:
-    p12 = dynl(12, townDB.narja, [], [], [], [], "The outskirts of the town of Narja..", '', False, '', False)
-    p13 = dynl(13, None, [], [], [], [], 'You see a town in the distance to the west.', '', False, '', False)
-    p25 = dynl(25, None, [], [], [], [], 'You see a town in the distance to the northeast', '', False, '', False)
-    p26 = dynl(26, None, [], [], [], [], 'You see a town in the distance to the north', '', False, '', False)
-    p27 = dynl(27, None, [], [], [EDB.sqmugger], [I.simplemap], 'You see a town in the distance to the northwest', 'You searched a small chest the mugger left behind and found your map!', False, '', False)
-    p42 = dynl(42, None, [], [], [EDB.fban, EDB.fban, EDB.fban], [], "A bandit camp lies ahead... type 'attack camp' if you want to fight", '', False, 'You notice a bandit camp up ahead. There are multiple enemies and it would be hard to take them all on at once without being very strong and skilled. Maybe you should think twice about approaching..', True)
-    p76 = dynl(76, townDB.lorasu, [], [], [], [], "The outskirts of the town of Lorasu..", '', False, '', False)
-    p169 = dynl(169, townDB.mourngarth, [], [], [], [], "To outskirts of the town of Mourngarth...", '', False, '', False)
+    p12 = dynl(12, townDB.narja, [], [], [], [], "The outskirts of the town of Narja..", '', False, '', False, '')
+    p13 = dynl(13, None, [], [], [], [], 'You see a town in the distance to the west.', '', False, '', False, '')
+    p25 = dynl(25, None, [], [], [], [], 'You see a town in the distance to the northeast', '', False, '', False, '')
+    p26 = dynl(26, None, [], [], [], [], 'You see a town in the distance to the north', '', False, '', False, '')
+    p27 = dynl(27, None, [], [], [EDB.sqmugger], [I.simplemap], 'You see a town in the distance to the northwest', 'You searched a small chest the mugger left behind and found your map!', False, 'You approach the smoke you saw in the distance, it is coming from a campfire and the mugger that attacked you is sitting at the fire drinking, he must pay!', True, 'You kill the mugger, and he had your gold purse. You search him for anything else you can find and your map isnt on him. You should search the area to see if it is around!')
+    p42 = dynl(42, None, [], [], [EDB.fban, EDB.fban, EDB.fban], [], "A bandit camp lies ahead... type 'attack camp' if you want to fight", '', False, 'You notice a bandit camp up ahead. There are multiple enemies and it would be hard to take them all on at once without being very strong and skilled. Maybe you should think twice about approaching..', True, '')
+    p76 = dynl(76, townDB.lorasu, [], [], [], [], "The outskirts of the town of Lorasu..", '', False, '', False, '')
+    p169 = dynl(169, townDB.mourngarth, [], [], [], [], "To outskirts of the town of Mourngarth...", '', False, '', False, '')
     pointsofinterest = [p13, p25, p26, p27, p42]
     townsl = [p12, p76, p169]
     #BORDERS

@@ -911,6 +911,19 @@ class Main():
             print("You cannot go through this water without a boat!")
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
+            for y in dynlDB.pointsofinterest:
+                if y.pos == self.worldspace[self.ypos - 1][self.xpos]:
+                    if y.danger:
+                        if not y.encbf:
+                            input(y.preencdesc)
+                            y.encbf = True
+                    else:
+                        if y.preencdesc == '':
+                            break
+                        else:
+                            if not y.encbf:
+                                print(y.preencdesc)
+                                y.encbf = True
             self.ypos -= 1
             for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
@@ -924,13 +937,19 @@ class Main():
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
                     if x.enemies != []:
-                        print("Fight")
                         for z in x.enemies:
+                            self.clear()
                             self.status = 'fighting'
                             self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
                             self.fightdisp()
                             self.fightform()
-            #print(str(self.worldspace[self.ypos][self.xpos]))
+                            input("Press any key to continue...")
+                            self.clear()
+                            if x.postcombdesc != '':
+                                input(x.postcombdesc)
+                                cprint(x.description, 'yellow')
+                            else:
+                                cprint(x.description, 'yellow')
     def goeast(self):
         if self.worldspace[self.ypos][(self.xpos + 1)] == 0:
             print("You cannot go through this water without a boat!")
@@ -942,10 +961,13 @@ class Main():
                         if not y.encbf:
                             input(y.preencdesc)
                             y.encbf = True
-                        else:
-                            print("Debug")
                     else:
-                        print("Debug")
+                        if y.preencdesc == '':
+                            break
+                        else:
+                            if not y.encbf:
+                                print(y.preencdesc)
+                                y.encbf = True
             self.xpos += 1
             for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
@@ -960,10 +982,18 @@ class Main():
                     cprint(x.description, 'yellow')
                     if x.enemies != []:
                         for z in x.enemies:
+                            self.clear()
                             self.status = 'fighting'
                             self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
                             self.fightdisp()
                             self.fightform()
+                            input("Press any key to continue...")
+                            self.clear()
+                            if x.postcombdesc != '':
+                                input(x.postcombdesc)
+                                cprint(x.description, 'yellow')
+                            else:
+                                cprint(x.description, 'yellow')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gosouth(self):
         if self.worldspace[self.ypos + 1][self.xpos] == 0:
@@ -985,6 +1015,19 @@ class Main():
                         self.scwvisited = True
             else:
                 #print(str(self.worldspace[self.ypos][self.xpos]))
+                for y in dynlDB.pointsofinterest:
+                    if y.pos == self.worldspace[self.ypos + 1][self.xpos]:
+                        if y.danger:
+                            if not y.encbf:
+                                input(y.preencdesc)
+                                y.encbf = True
+                        else:
+                            if y.preencdesc == '':
+                                break
+                            else:
+                                if not y.encbf:
+                                    print(y.preencdesc)
+                                    y.encbf = True
                 self.ypos += 1
                 for x in dynlDB.townsl:
                     if x.pos == self.worldspace[self.ypos][self.xpos]:
@@ -999,18 +1042,39 @@ class Main():
                     if x.pos == self.worldspace[self.ypos][self.xpos]:
                         cprint(x.description, 'yellow')
                         if x.enemies != []:
-                            print("Fight")
                             for z in x.enemies:
+                                self.clear()
                                 self.status = 'fighting'
-                                self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
+                                self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth),
+                                                      z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
                                 self.fightdisp()
                                 self.fightform()
+                                input("Press any key to continue...")
+                                self.clear()
+                                if x.postcombdesc != '':
+                                    input(x.postcombdesc)
+                                    cprint(x.description, 'yellow')
+                                else:
+                                    cprint(x.description, 'yellow')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def gowest(self):
         if self.worldspace[self.ypos][(self.xpos - 1)] == 0:
             print("You cannot go through this water without a boat!")
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
+            for y in dynlDB.pointsofinterest:
+                if y.pos == self.worldspace[self.ypos][self.xpos - 1]:
+                    if y.danger:
+                        if not y.encbf:
+                            input(y.preencdesc)
+                            y.encbf = True
+                    else:
+                        if y.preencdesc == '':
+                            break
+                        else:
+                            if not y.encbf:
+                                print(y.preencdesc)
+                                y.encbf = True
             self.xpos -= 1
             for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
@@ -1024,12 +1088,19 @@ class Main():
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
                     if x.enemies != []:
-                        print("Fight")
                         for z in x.enemies:
+                            self.clear()
                             self.status = 'fighting'
                             self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
                             self.fightdisp()
                             self.fightform()
+                            input("Press any key to continue...")
+                            self.clear()
+                            if x.postcombdesc != '':
+                                input(x.postcombdesc)
+                                cprint(x.description, 'yellow')
+                            else:
+                                cprint(x.description, 'yellow')
             #print(str(self.worldspace[self.ypos][self.xpos]))
     def town(self):
         for x in dynlDB.townsl:
@@ -1066,9 +1137,16 @@ class Main():
                             self.status = 'combat'
                             self.fightdisp()
                             self.fightform()
+                            self.mgguykilled = True
+                            self.mgentered = True
                         elif x == '3':
                             self.clear()
                             print("He stares you down as you leave.")
+                    else:
+                        input("You enter " + x.town.name + " and are welcomed through the gates...")
+                        self.clear()
+                        self.location = x.town
+                        self.towndisp()
                 else:
                     input("You enter " + x.town.name + " and are welcomed through the gates...")
                     self.clear()
