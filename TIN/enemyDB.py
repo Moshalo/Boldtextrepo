@@ -42,7 +42,14 @@ class enemyDB:
         {'item': I.muggercap, 'minqty': 1, 'maxqty': 1, 'dc': 25}
     ], 1)
 
-    fban = e("Woodland Bandit", 20, randint(20, 40), 40, 3, 1, 1, [], 2)
+    fban = e("Woodland Bandit", 20, randint(20, 40), 40, 3, 1, 1, [
+        {'item': I.irondagger, 'minqty': 1, 'maxqty': 2, 'dc': 40},
+        {'item': I.clothshirt, 'minqty': 1, 'maxqty': 1, 'dc': 30},
+        {'item': I.leathertunic, 'minqty': 1, 'maxqty': 1, 'dc': 20},
+        {'item': I.clothpants, 'minqty': 1, 'maxqty': 1, 'dc': 25},
+        {'item': I.leatherboots, 'minqty': 1, 'maxqty': 1, 'dc': 25},
+        {'item': I.muggercap, 'minqty': 1, 'maxqty': 1, 'dc': 25}
+    ], 2)
     wolf = e("Wolf", 10, randint(10, 30), 30, 2, 1, 1, [
         {'item': I.wolfpelt, 'minqty': 1, 'maxqty': 2, 'dc': 100},
         {'item': I.sharpcanine, 'minqty': 1, 'maxqty': 5, 'dc': 75},

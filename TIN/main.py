@@ -61,6 +61,8 @@ class Main():
         self.mgentered = False
         self.mgguykilled = False
         self.mgguypaid = False
+        self.scwpriv = False
+        self.scwvisited = False
         #CharacterStats(WIP)
         self.statswords = 1
         self.statblock = 1
@@ -169,7 +171,7 @@ class Main():
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 0, 0, 266, 267, 268, 269, 270, 271, 272, 273, 274, 0, 275, 276, 277, 278, 0, 0, 0, 0, 0],  # 19DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 0, 294, 295, 296, 297, 298, 299, 300, 301, 302, 0, 0, 0, 303, 304, 0, 0, 0, 0, 0],  # 20DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 0, 0, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 0, 0, 0, 0, 0, 0, 0],  # 21DONE
-            [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 0, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 22
+            [0, 0, 0, 0, 0, 0, 0, 0, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 0, 0, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 0, 0, 0, 0, 0, 0, 0],  # 22DONE
             [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 23
             [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0, 0, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 0, 0, 0, 0, 0, 0, 0],  # 24
             [0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 25
@@ -934,6 +936,16 @@ class Main():
             print("You cannot go through this water without a boat!")
         else:
             #print(str(self.worldspace[self.ypos][self.xpos]))
+            for y in dynlDB.pointsofinterest:
+                if y.pos == self.worldspace[self.ypos][self.xpos + 1]:
+                    if y.danger:
+                        if not y.encbf:
+                            input(y.preencdesc)
+                            y.encbf = True
+                        else:
+                            print("Debug")
+                    else:
+                        print("Debug")
             self.xpos += 1
             for x in dynlDB.townsl:
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
@@ -947,7 +959,6 @@ class Main():
                 if x.pos == self.worldspace[self.ypos][self.xpos]:
                     cprint(x.description, 'yellow')
                     if x.enemies != []:
-                        print("Fight")
                         for z in x.enemies:
                             self.status = 'fighting'
                             self.fighting = enemy(z.name, z.minhealth, randint(z.minhealth, z.maxhealth), z.maxhealth, z.damage, z.defence, z.hasgun, z.dp, z.id)
@@ -960,6 +971,18 @@ class Main():
         else:
             if self.worldspace[self.ypos + 1][self.xpos] in dynlDB.southcompwall:
                 print("You see a giant wall before you with banners that you do not recognize. There is no way for you to get through.")
+            elif self.worldspace[self.ypos + 1][self.xpos] in dynlDB.southcompgate:
+                if self.scwpriv == True:
+                    print("The guards let you through the gate and you move south.")
+                    self.ypos += 1
+                else:
+                    if self.scwvisited == True:
+                        input("You approach a massive gate guarded by armed soldiers..")
+                        input("Southern Soldier: I told you already, no outsiders allowed through the gate right now. I'm not letting you in.")
+                    else:
+                        input("You approach a massive gate guarded by armed soldiers..")
+                        print("Dialogue coming soon, you can't go through.")
+                        self.scwvisited = True
             else:
                 #print(str(self.worldspace[self.ypos][self.xpos]))
                 self.ypos += 1
@@ -1490,7 +1513,7 @@ class Main():
                 self.fightform()
     def save(self):
         save = input("What would you like to name the save?(This will overwrite): ")
-        pickle.dump([self.wallet[I.goldpiece], self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
+        pickle.dump([self.scwpriv, self.scwvisited, self.wallet[I.goldpiece], self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext,
                      self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled], open("{0}.tin".format(save), "wb"))
         #City and town data
         pickle.dump([TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith, TDB.narja.known, TDB.lorasu.bankamount, TDB.lorasu.generalstore, TDB.lorasu.blacksmith, TDB.lorasu.gunsmith, TDB.lorasu.known], open("{0}.tin".format(save + "cd"), "wb"))
@@ -1502,7 +1525,7 @@ class Main():
         self.eitemslist, self.inventory, self.sq1, self.sq2, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.gslot, self.mslot, self.headslot, self.chestslot, self.legslot, self.footslot, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.devenabled, TDB.ttown = pickle.load(open("devsave.tin", "rb"))
     def loadt(self):
         load = input("What file would you like to load(Doesn't exist = Crash): ")
-        self.wallet[I.goldpiece], self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
+        self.scwpriv, self.scwvisited, self.wallet[I.goldpiece], self.skillblacksmith, self.skillgunsmith, self.skillfishing, self.skillleatherwork, self.skillbuilding, self.skillmining, self.skillforaging, self.skillhunting, self.skillcooking, self.skillalch, self.xpblacksmith, self.xpblacksmithnext, self.xpbuilding, self.xpbuildingnext, self.xphunting, self.xphuntingnext, self.xpcooking, self.xpcookingnext, self.xpfishing, self.xpfishingnext, self.xpforaging, self.xpforagingnext, self.xpmining, self.xpminingnext, self.xpalch, self.xpalchnext, self.xpgunsmith, self.xpgunsmithnext, self.xpforaging, self.xpforagingnext, self.xpleatherwork, self.xpleatherworknext, self.stackinv, self.maxhealth, self.inventory, self.questlog, self.compquests, self.name, self.health, self.xpos, self.ypos, self.rs, self.ms, self.hs, self.cs, self.ps, self.fs, self.damage, self.gundamage, self.shot, self.reloading, self.defence, self.status, self.fighting, self.ammo, self.gold, self.devenabled = pickle.load(open("{0}.tin".format(load), "rb"))
         #City and town data
         TDB.narja.bankamount, TDB.narja.generalstore, TDB.narja.blacksmith, TDB.narja.gunsmith, TDB.narja.known, TDB.lorasu.bankamount, TDB.lorasu.generalstore, TDB.lorasu.blacksmith, TDB.lorasu.gunsmith, TDB.lorasu.known = pickle.load(open("{0}.tin".format(load + "cd"), "rb"))
         #POIData
@@ -1696,6 +1719,7 @@ class Main():
         6. Alchemy Menu
         7. Blacksmithing Menu
         8. Smelting Menu 
+        9. Add south comp wall priv
         --------------------------------------
         """)
         choice = input("Type the number: ")
@@ -1727,6 +1751,8 @@ class Main():
             self.bscraft()
         elif choice == '8':
             self.smeltcraft()
+        elif choice == '9':
+            self.scwpriv = True
     def dev6(self):
         self.health = 20000
         cprint(self.clothcap.name, self.clothcap.color)
