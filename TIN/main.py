@@ -44,7 +44,7 @@ class Main():
         self.fs = I.ruggedshoes
         self.location = None
         self.npc = None
-        self.damage = 0
+        self.damage = 2
         self.gundamage = 0
         self.shot = 0
         self.reloading = 0
@@ -1447,7 +1447,7 @@ class Main():
         if self.ms != None:
             cprint(self.ms.style + "Weapon: %s" % self.ms.name, self.ms.color)
         else:
-            print("Weapon: Empty Slot")
+            print("Weapon: Fists")
         if self.hs != None:
             cprint(self.hs.style + "Head: %s" % self.hs.name, self.hs.color)
         else:
@@ -1949,6 +1949,7 @@ if menuchoice == "1":
     where the man who mugged you went? It's up to you to decide if you chase after
     him, or if you forget about the whole thing for now.
     """)
+    cprint(Style.BRIGHT + "Type 'inventory' to check your inventory and 'equip' to equip an item.")
     cprint(Style.BRIGHT + "(type help to get a list of actions)", 'yellow')
 elif menuchoice == "2":
     p.loadt()

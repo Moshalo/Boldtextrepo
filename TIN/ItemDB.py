@@ -17,7 +17,9 @@ class ItemDB:
     simplemap = m("Simple Map", 'map', 0, 0, 15, 6, 'white', Style.DIM, 2)
     #MiscItems
     bread = m("Loaf of bread", "food", 5, 5, 2, 1, 'white', Style.DIM, 10)
+    charredpork = m("Charred pork", 'food', 9, 6, 8, 4, 'white', Style.DIM, 99)
     wberries = m("Wild Berries", "food", 10, 2, 5, 3, 'white', Style.DIM, 11)
+    boarjerky = m("Boar jerky", 'food', 7, 4, 4, 2, 'white', Style.DIM, 99)
     aitem = m("34y6y734577562735723", "admin", 0, 0, 0, 0, 'white', Style.DIM, 1000000)
     #CRAFTING ITEMS(STACKABLE)
     coal = m("Coal", "ore", 0, 0, 10, 5, 'white', Style.DIM, 89000)
@@ -83,12 +85,15 @@ class ItemDB:
     armnemes = a("Armored Nemes", "helm", 35, 40, 39500, 34900, 'red', Style.BRIGHT, 50, 9010)
     clothcap = a("Cloth cap", "helm", 1, 0, 10, 5, 'white', Style.DIM, 1, 2000)
     muggercap = a("Mugger's cap", "helm", 2, 0, 10, 5, 'white', Style.DIM, 1, 2101)
+    leathercap = a("Leather cap", "helm", 3, 0, 13, 6, 'white', Style.DIM, 1, 99)
+    reinleathcap = a("Reinforced Leather Cap", "helm", 4, 0, 20, 10, 'white', Style.BRIGHT, 2, 99)
     aetherialhelm = a("Aetherial Headwrap", "helm", 22, 40, 24000, 14000, 'magenta', Style.BRIGHT, 36, 600)
     guildedcc = a("Guilded Chainmail Coif", "helm", 28, 30, 26000, 13000, 'magenta', Style.BRIGHT, 38, 715)
     guildedhelm = a("Guilded Helm", "helm", 32, 50, 29000, 14500, 'yellow', Style.BRIGHT, 42, 720)
     # ---CHESTPLATES---
     clothshirt = a("Cloth shirt", 'chest', 2, 0, 5, 3, 'white', Style.DIM, 1, 1999)
     leathertunic = a("Leather tunic", "chest", 3, 0, 15, 7, 'white', Style.DIM, 1, 2001)
+    reinleathtunic = a("Reinforced Leather tunic", 'chest', 5, 0, 30, 15, 'white', Style.BRIGHT, 2, 99)
     leathcolbp = a("Colonial Breastplate", "chest", 10, 0, 100, 50, 'white', Style.BRIGHT, 10, 100)
     aetherialcp = a("Aetherial Chestplate", "chest", 30, 55, 30000, 20000, 'magenta', Style.BRIGHT, 36, 601)
     guildedccp = a("Guilded Chainmail Vest", "chest", 35, 45, 38000, 19000, 'magenta', Style.BRIGHT, 38, 716)
@@ -96,17 +101,19 @@ class ItemDB:
     bjarncp = a("Bjarn's Chestplate", "chest", 50, 100, 40000, 35000, 'red', Style.BRIGHT, 50, 9050)
     # ---LEGPLATES---
     clothpants = a("Cloth pants", "legs", 2, 0, 12, 6, 'white', Style.DIM, 1, 2002)
+    leatherchaps = a("Leather chaps", 'legs', 4, 0, 22, 11, 'white', Style.BRIGHT, 2, 99)
     guildedlp = a("Guilded Legplates", "legs", 37, 50, 32000, 17500, 'yellow', Style.BRIGHT, 42, 722)
     guildedcpants = a("Guilded Chainmail Pants", "legs", 31, 40, 30000, 15000, 'magenta', Style.BRIGHT, 38, 717)
     aetheriallp = a("Aetherial Legwraps", "legs", 27, 45, 28000, 18000, 'magenta', Style.BRIGHT, 36, 602)
     # ---BOOTS---
     ruggedshoes = a("Rugged shoes", "foot", 1, 0, 10, 5, 'white', Style.DIM, 1, 2003)
     leatherboots = a("Leather boots", 'foot', 2, 0, 20, 10, 'white', Style.DIM, 1, 2004)
+    paddedleathboots = a("Padded Leather boots", 'foot', 3, 0, 25, 12, 'white', Style.BRIGHT, 2, 99)
     armleatherboots = a("Armored Leather boots", 'foot', 21, 0, 12000, 6000, 'white', Style.DIM, 1, 2005)
     aetherialwraps = a("Aetherial Footwraps", "foot", 22, 5, 24000, 14000, 'magenta', Style.BRIGHT, 36, 603)
     guildedboots = a("Guilded Boots", "foot", 30, 10, 28000, 14000, 'yellow', Style.BRIGHT, 38, 718)
 
-    itemlist = [leatherboots, shodpistol, corruptedroyalsw, guildedcpants, guildedcc, guildedccp, guildedboots, guildedhelm, guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
+    itemlist = [charredpork, reinleathtunic, leatherchaps, paddedleathboots, leathercap, reinleathcap, leatherboots, shodpistol, corruptedroyalsw, guildedcpants, guildedcc, guildedccp, guildedboots, guildedhelm, guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
                 flpistol, gppistol, guildpistol, clothcap, clothpants, clothshirt, leathertunic, leathcolbp, aetherialcp, aetherialhelm, aetheriallp, aetherialwraps, ruggedshoes,
                 lowhp, hp, medhp, largehp, smaethhp, aethhp, largeaethhp, pureaethhp, bjarncp, goldkho, redsteelnightblade, carvedpistol, simplemap]
-    stackablelist = [goldpiece, coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]
+    stackablelist = [boarjerky, goldpiece, coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]
