@@ -46,6 +46,12 @@ class townDB():
     lorasu = town("Lorasu", 76, 20, 11, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], False)
     mourngarth = town("Mourngarth", 169, 18, 15, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], False)
 
+class ferryl():
+    def __init__(self, pos, returnpos, cost):
+        self.pos = pos
+        self.returnpos = returnpos
+        self.cost = cost
+
 class dynl():
     def __init__(self, pos, town, locations, npcs, enemies, items, description, foundlootdesc, encbf, preencdesc, danger, postcombdesc):
         self.pos = pos
