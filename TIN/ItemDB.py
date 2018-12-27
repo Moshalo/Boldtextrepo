@@ -56,9 +56,13 @@ class ItemDB:
     ironlsword = w("Iron Longsword", "mwep", 9, 0, 15, 7, 'white', Style.DIM, 1, 101)
     irondagger = w("Iron Dagger", "mwep", 5, 0, 6, 3, 'white', Style.DIM, 1, 102)
     #Common+
+    supirondagger = w("Superior Iron Dagger", "mwep", 7, 0, 20, 10, 'white', Style.BRIGHT, 3, 99)
+    supironsword = w("Superior Iron Shortsword", "mwep", 8, 0, 40, 20, 'white', Style.BRIGHT, 3, 99)
+    supironlsword = w("Superior Iron Longsword", "mwep", 11, 0, 50, 25, 'white', Style.BRIGHT, 3, 99)
     steelsword = w("Steel Shortsword", "mwep", 12, 0, 100, 50, 'white', Style.BRIGHT, 5, 200)
     steellsword = w("Steel Longsword", "mwep", 15, 0, 120, 60, 'white', Style.BRIGHT, 5, 201)
     #Uncommon
+    supsteelsword = w("Superior Steel Shortsword", "mwep", 14, 0, 130, 75, 'white', Style.BRIGHT, 15, 99)
     bsteelsword = w("Blacksteel Shortsword", "mwep", 18, 0, 300, 150, 'green', Style.DIM, 15, 300)
     #Uncommon+
     bsteellsword = w("Blacksteel Longsword", "mwep", 21, 0, 450, 225, 'green', Style.BRIGHT, 15, 301)
@@ -113,7 +117,7 @@ class ItemDB:
     aetherialwraps = a("Aetherial Footwraps", "foot", 22, 5, 24000, 14000, 'magenta', Style.BRIGHT, 36, 603)
     guildedboots = a("Guilded Boots", "foot", 30, 10, 28000, 14000, 'yellow', Style.BRIGHT, 38, 718)
 
-    itemlist = [charredpork, reinleathtunic, leatherchaps, paddedleathboots, leathercap, reinleathcap, leatherboots, shodpistol, corruptedroyalsw, guildedcpants, guildedcc, guildedccp, guildedboots, guildedhelm, guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
+    itemlist = [supironsword, supironlsword, charredpork, reinleathtunic, leatherchaps, paddedleathboots, leathercap, reinleathcap, leatherboots, shodpistol, corruptedroyalsw, guildedcpants, guildedcc, guildedccp, guildedboots, guildedhelm, guildedcp, guildedlp, coal, royalhp, ironore, ironingot, woodrod, wberries, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, armnemes, ironsword, ironlsword, irondagger, steelsword, steellsword, bsteelsword, bsteellsword, disasterblade, sfsword, bladeofeternity, gsofkings, mkwarhammer,
                 flpistol, gppistol, guildpistol, clothcap, clothpants, clothshirt, leathertunic, leathcolbp, aetherialcp, aetherialhelm, aetheriallp, aetherialwraps, ruggedshoes,
                 lowhp, hp, medhp, largehp, smaethhp, aethhp, largeaethhp, pureaethhp, bjarncp, goldkho, redsteelnightblade, carvedpistol, simplemap]
     stackablelist = [boarjerky, goldpiece, coal, ironore, ironingot, woodrod, aethdust, centhorn, wolfpelt, bottlewater, salt, potatoweed, wberries]

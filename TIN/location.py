@@ -42,9 +42,9 @@ class campDB():
     bcamp1 = camp("Bandit Camp", 42, [], [], False, "a small campsite with bandits around the campfire..")
 
 class townDB():
-    narja = town("Narja", 12, 16, 7, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], True)
-    lorasu = town("Lorasu", 76, 20, 11, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], False)
-    mourngarth = town("Mourngarth", 169, 18, 15, True, 0, [], [], [I.wolfpelt, I.bread, I.bread], False)
+    narja = town("Narja", 12, 16, 7, True, {I.goldpiece: 0}, [], [], [I.wolfpelt, I.bread, I.bread], True)
+    lorasu = town("Lorasu", 76, 20, 11, True, {I.goldpiece: 0}, [], [], [I.wolfpelt, I.bread, I.bread], False)
+    mourngarth = town("Mourngarth", 169, 18, 15, True, {I.goldpiece: 0}, [], [], [I.wolfpelt, I.bread, I.bread], False)
 
 class ferryl():
     def __init__(self, pos, returnpos, cost):

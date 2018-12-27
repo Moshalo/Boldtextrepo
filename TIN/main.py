@@ -139,6 +139,7 @@ class Main():
             I.woodrod: 0,
             I.sharpcanine: 0,
             I.broketooth: 0,
+            I.boarjerky: 0,
         }
         #self.inventory = [I.bread, I.ironsword, I.ironlsword, I.leathertunic, I.steelsword, I.steellsword, I.leathcolbp, I.bsteelsword, I.bsteellsword, I.disasterblade, I.sfsword,
                          #I.bladeofeternity, I.aetherialhelm, I.aetherialcp, I.aetheriallp, I.aetherialwraps, I.gsofkings, I.mkwarhammer]
@@ -269,8 +270,8 @@ class Main():
                         print("Dropped " + str(x) + " " + d['item'].name + "(s)")
                         if d['item'] in self.stackinv:
                             self.stackinv[d['item']] += x
-                        if d['item'] in self.wallet:
-                            self.wallet[d['item']] += x
+                        elif d['item'] in self.wallet:
+                                self.wallet[d['item']] += x
                         else:
                             a = 0
                             while a < x:
@@ -793,12 +794,13 @@ class Main():
                     print("You cannot give this to %s without accepting the quest first." % self.npc.name)
     def bankdisp(self):
         self.clear()
-        print("-----------------------------------")
-        print("               Bank                ")
-        print("-----------------------------------")
+        cprint("█████████████████████████████████████████", 'yellow')
+        cprint(Style.BRIGHT + "               Bank                ", 'white')
+        cprint("-----------------------------------", 'yellow')
         print("You have %d gold on you." % self.gold)
         print("You have %d stored in this bank." % self.location.bankamount)
-        print("-----------------------------------")
+        cprint("-----------------------------------", 'yellow')
+        cprint("█████████████████████████████████████████", 'yellow')
         choice = input("(deposit, withdraw, leave)> ")
         if choice == "deposit":
             if self.gold > 0:
