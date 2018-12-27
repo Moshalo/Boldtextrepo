@@ -1801,7 +1801,7 @@ class Main():
         7. Blacksmithing Menu
         8. Smelting Menu 
         9. Add south comp wall priv
-        10. Sound test
+        10. Get Scroll
         --------------------------------------
         """)
         choice = input("Type the number: ")
@@ -1835,6 +1835,11 @@ class Main():
             self.smeltcraft()
         elif choice == '9':
             self.scwpriv = True
+        elif choice == '10':
+            itemtg = input("What scroll to get?: ")
+            for x in SDB.allrecipescrolls:
+                if itemtg == x.name:
+                    self.inventory.append(x)
     def dev6(self):
         self.health = 20000
         cprint(self.clothcap.name, self.clothcap.color)
