@@ -10,3 +10,6 @@ class scroll:
 class ScrollDB():
     # RECIPE SCROLLS
     recsmallhp = scroll("Recipe scroll: Small Health Potion", 'Small Health Potion', 'scroll', 'alch', RDB.smallhpr)
+
+
+    allrecipescrolls = [recsmallhp]
